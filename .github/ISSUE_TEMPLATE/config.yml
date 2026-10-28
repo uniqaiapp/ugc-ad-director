@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/uniqaiapp/ugc-ad-director/discussions
+    about: Ask how to adapt the skill to a vertical or share a script that worked.
+  - name: Policy or security concern
+    url: mailto:support@uniqai.app
+    about: Anything you would rather not post publicly.

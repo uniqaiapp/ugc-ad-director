@@ -1,0 +1,11 @@
+{
+  "name": "ugc-ad-director",
+  "description": "UGC ad director: turns a product URL or brief into TikTok/Reels-style ad scripts (hook, problem, demo, CTA), shot lists and image-to-video prompts for Kling 3.0 and Veo 3 with native speech. Claude Code skill + Cursor/Codex rules + hook library. No fake testimonials: the skill drafts, you disclose AI. By UniqAI.",
+  "homepage": "https://uniqai.app/video/image-to-video?utm_source=github&utm_medium=readme&utm_campaign=ugc-ad-director",
+  "topics": [
+    "ugc-ads", "ai-ads", "ad-creative", "video-ads", "tiktok-ads", "image-to-video", "kling", "veo3",
+    "marketing", "copywriting", "claude-skills", "agent-skills", "cursor-rules", "uniqai"
+  ],
+  "settings": { "has_issues": true, "has_discussions": true, "has_wiki": false, "has_projects": false, "default_branch": "main" },
+  "social_preview": "assets/social-preview.png"
+}
