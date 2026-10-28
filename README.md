@@ -18,6 +18,8 @@
 
 </div>
 
+English · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (BR)](README.pt-BR.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
+
 # ugc-ad-director: AI UGC ad scripts and video prompts
 
 AI UGC ads start with a script, not a prompt. This skill turns a product brief into a TikTok / Reels / Shorts ad script with the hook inside the first two seconds, five timed beats (hook → problem → demo → proof → CTA), a shot list, on-screen captions, voiceover, and a per-shot prompt for the image model, for Kling and for Veo 3 with spoken lines. A stdlib Python script lints the result and refuses what should not ship: an AI presenter talking like a customer, "clinically proven" without a source, a missing AI label.
