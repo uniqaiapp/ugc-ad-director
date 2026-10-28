@@ -29,4 +29,4 @@ python3 scripts/ugc_script.py stats examples/scripts/skincare-serum.json
 
 ## The one that must fail
 
-[`bad/fake-testimonial.json`](bad/fake-testimonial.json): an AI presenter saying "I've been using these for three years", "clinically proven" with no evidence, "as seen on TikTok", a 3-second hook, no proof beat, no AI label. `lint` reports ten errors; `tests/test_scripts.py` asserts each of them.
+[`bad/fake-testimonial.json`](bad/fake-testimonial.json): an AI presenter saying "I've been using these for three years", "clinically proven" with no evidence, "as seen on TikTok", a 3-second hook, no proof beat, no AI label. `lint` reports 12 errors and 8 warnings; `tests/test_scripts.py` asserts the main ones and pins the summary line quoted in README to the real output.

@@ -59,7 +59,7 @@ Scaffold a file to start from: `python3 scripts/ugc_script.py new --vertical ski
 
 ## Examples
 
-`examples/scripts/` holds eleven scripts across verticals (skincare, app, kitchen, pets, course, B2B, cleaning, footwear, travel, coffee, electronics); `examples/rendered/` and `examples/prompts/` are their committed outputs. `examples/bad/fake-testimonial.json` is a script that lint must reject, with ten errors.
+`examples/scripts/` holds eleven scripts across verticals (skincare, app, kitchen, pets, course, B2B, cleaning, footwear, travel, coffee, electronics); `examples/rendered/` and `examples/prompts/` are their committed outputs. `examples/bad/fake-testimonial.json` is a script that lint must reject (12 errors, 8 warnings at the time of writing; the exact lines are in README).
 
 ```bash
 python3 scripts/ugc_script.py lint examples/scripts/skincare-serum.json

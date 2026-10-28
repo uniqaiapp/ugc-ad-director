@@ -70,7 +70,13 @@ class TestBadExample(unittest.TestCase):
         self.assertIn("ai_label is empty", msgs)
         self.assertIn("hook shot ends at 3s", msgs)
         self.assertIn("missing beat(s): proof", msgs)
-        self.assertEqual(run("lint", path).returncode, 1)
+        out = run("lint", path)
+        self.assertEqual(out.returncode, 1)
+        summary = out.stdout.strip().splitlines()[-1]
+        self.assertTrue(summary.endswith(f"fake-testimonial.json: failed, {len(r.errors)} errors, {len(r.warnings)} warnings"), summary)
+        for doc in ("README.md", "demo.txt"):
+            with open(os.path.join(ROOT, doc), encoding="utf-8") as fh:
+                self.assertIn(f"{len(r.errors)} errors, {len(r.warnings)} warnings", fh.read(), doc)
 
     def test_real_person_may_testify(self):
         s = {"presenter": {"type": "real_person"}}

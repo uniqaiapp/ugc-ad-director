@@ -72,16 +72,17 @@ Dewline Barrier Serum: fragrance-free hydrating serum with ceramides and 2% niac
 Audience: women 22-35 with dry, flaky skin under makeup. 30 s, AI presenter.
 ```
 
-**After** (from `examples/rendered/skincare-serum.md`)
+**After** (first three rows of the timeline in `examples/rendered/skincare-serum.md`)
 
 ```text
-| # | Time   | Beat    | Visual                                              | Caption                                          | Voiceover                                                           | Source         |
-| 1 | 0s–2s  | hook    | Close-up of a fingertip dragging foundation across  | Your foundation isn't the problem. / AI-generated ad | Your foundation isn't the problem.                              | image-to-video |
-| 2 | 2s–7s  | problem | Presenter to camera, towel on hair, flaky sponge    | dry skin + makeup = cake                          | Dry skin drinks the water out of your makeup, so it cakes by lunch. | image-to-video |
-| 3 | 7s–15s | demo    | Two drops pressed into the cheek with two fingers   | two drops, press, don't rub                       | Two drops. Press it in with two fingers, don't rub. Ceramides fill the cracks, niacinamide calms the red. | image-to-video |
+| # | Time | Beat | Visual | Caption | Voiceover | Source |
+|---|---|---|---|---|---|---|
+| 1 | 0s–2s | hook | Close-up of a fingertip dragging foundation across dry, flaky cheek; product in the mirror | Your foundation isn't the problem. / AI-generated ad | Your foundation isn't the problem. | image-to-video |
+| 2 | 2s–7s | problem | Presenter to camera, towel on hair, holding up a flaky makeup sponge | dry skin + makeup = cake | Dry skin drinks the water out of your makeup, so it cakes by lunch. | image-to-video |
+| 3 | 7s–15s | demo | Two drops of serum pressed into the cheek with two fingers; skin goes from matte-flaky to even | two drops, press, don't rub | Two drops. Press it in with two fingers, don't rub. Ceramides fill the cracks, niacinamide calms the red. | image-to-video |
 ```
 
-Veo 3 prompt for shot 2:
+Veo 3 prompt for shot 2 (from `examples/prompts/skincare-serum.txt`):
 
 ```text
 fictional woman in her late twenties, towel wrapped on her head, no makeup, holding a makeup sponge toward the lens, small bathroom, white tiles.
@@ -103,14 +104,19 @@ No subtitles, no captions, no logos in frame.
 error   hook: hook is 18 words; keep it under 13 so it lands inside 2 s
 error   shot 1: hook shot ends at 3s; it must end by 2s
 error   beats: missing beat(s): proof
+error   shot 1: prompt is missing 'camera'
 error   shot 1: reads as a first-person customer testimonial but the presenter is 'ai_generated': rewrite as a demo or a sourced claim
+error   shot 2: reads as a first-person customer testimonial but the presenter is 'ai_generated': rewrite as a demo or a sourced claim
 error   shot 3: implies a platform or third-party endorsement; remove it
 error   claim 1: 'clinically proven' has no evidence; add a source, a test or remove the claim
 error   shot 3: 'guaranteed' is a claim; list it under 'claims' with evidence or drop it
+error   shot 3: 'doctor recommended' is a claim; list it under 'claims' with evidence or drop it
 error   shot 4: '50%' is a claim; list it under 'claims' with evidence or drop it
 error   compliance: ai_label is empty but the ad contains AI-generated footage or an AI presenter
-examples/bad/fake-testimonial.json: failed, 10 errors, 6 warnings
+examples/bad/fake-testimonial.json: failed, 12 errors, 8 warnings
 ```
+
+The eight warnings (caption length, pace, unlisted numbers, missing platform toggle, undescribed presenter) are omitted here; `python3 scripts/ugc_script.py lint examples/bad/fake-testimonial.json` prints all of them.
 
 </details>
 
