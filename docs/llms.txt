@@ -1,0 +1,34 @@
+# ugc-ad-director: UGC ad script checker (UniqAI, open source)
+
+> Free in-browser checker for UGC ad scripts. It lints the hook, the AI label, claims and fake testimonials, then renders a first-frame image prompt, a Kling prompt and a Veo 3 prompt for every generated shot. 11 example scripts, 63 hooks. Rules last checked 2026-10-28; a working checklist, not legal advice. Code MIT, vocabulary CC BY 4.0. Curated by Vlad Yasinski (https://www.linkedin.com/in/vlad-yasinski-ua5er/).
+
+## Pages
+
+- [Script checker](https://uniqaiapp.github.io/ugc-ad-director/): the in-browser tool, with an example loaded
+- [Examples](https://uniqaiapp.github.io/ugc-ad-director/examples/): 11 finished scripts
+- [Hook library](https://uniqaiapp.github.io/ugc-ad-director/hooks/): 63 hooks of 12 words or fewer, by product category
+- [Compliance rules](https://uniqaiapp.github.io/ugc-ad-director/compliance/): the AI label, testimonials, impersonation and claims, each with a lint example
+
+## Examples
+
+- [Glass-skin serum: the two-finger test](https://uniqaiapp.github.io/ugc-ad-director/examples/skincare-serum/): hook "Your foundation isn't the problem." (30s, AI presenter)
+- [Platefull: Sunday meal prep in one screen](https://uniqaiapp.github.io/ugc-ad-director/examples/meal-prep-app/): hook "Seven dinners, one grocery list, zero scrolling." (20s, no presenter)
+- [Dicewell chopper: one onion, no tears, four seconds](https://uniqaiapp.github.io/ugc-ad-director/examples/kitchen-chopper/): hook "If onions make you cry, watch this." (30s, AI presenter)
+- [Bitewell chews: the breath test (real owner, signed release)](https://uniqaiapp.github.io/ugc-ad-director/examples/dog-dental-chews/): hook "POV: your dog's breath enters first." (30s, real person)
+- [Tongue: ten minutes of Spanish you actually say](https://uniqaiapp.github.io/ugc-ad-director/examples/language-course/): hook "Stop learning Spanish. Start saying it." (45s, AI presenter)
+- [Ledgerly: the invoice that chases itself](https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/): hook "You don't need to chase that invoice." (30s, AI presenter)
+- [Clearstone: the hob in fifteen seconds](https://uniqaiapp.github.io/ugc-ad-director/examples/cleaning-spray/): hook "Burnt-on hob. Watch the wipe." (15s, no presenter)
+- [Stride Two: the sock test](https://uniqaiapp.github.io/ugc-ad-director/examples/running-shoes/): hook "Your shoe's too narrow. Here's the test." (30s, AI presenter)
+- [Roamly eSIM: landed, connected, before the bags](https://uniqaiapp.github.io/ugc-ad-director/examples/travel-esim/): hook "Don't buy the airport SIM." (30s, AI presenter)
+- [Roastday: the date on the bag](https://uniqaiapp.github.io/ugc-ad-director/examples/coffee-subscription/): hook "Find the date on your coffee bag." (20s, no presenter)
+- [Pawcam: what the dog does at 2pm](https://uniqaiapp.github.io/ugc-ad-director/examples/pet-camera/): hook "What the dog does at 2pm." (30s, AI presenter)
+
+## Source
+
+- [Repository](https://github.com/uniqaiapp/ugc-ad-director): ugc_script.py (stdlib CLI), example scripts as JSON, vocabulary in references/
+- [Compliance notes](https://github.com/uniqaiapp/ugc-ad-director/blob/main/references/compliance.md): checked 2026-10-28
+
+## Run a prompt
+
+- [UniqAI Kling](https://uniqai.app/models/kling?utm_source=github&utm_medium=llms&utm_campaign=ugc-ad-director): run Kling prompts
+- [UniqAI Veo](https://uniqai.app/models/veo?utm_source=github&utm_medium=llms&utm_campaign=ugc-ad-director): run Veo 3 prompts

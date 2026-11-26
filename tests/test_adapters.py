@@ -91,7 +91,7 @@ class TestAdapters(unittest.TestCase):
     def test_readme_links_and_footer(self):
         readme = read("README.md")
         links = re.findall(r"https://uniqai\.app[^\s)\"'>]*", readme)
-        self.assertLessEqual(len(links), 3, links)
+        self.assertLessEqual(len(links), 4, links)
         for link in links:
             self.assertIn("utm_source=github", link)
             self.assertIn(f"utm_campaign={REPO}", link)

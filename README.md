@@ -12,6 +12,8 @@
 [![Codex](https://img.shields.io/badge/Codex-AGENTS.md-d1fe17?style=flat-square&labelColor=0d0f12)](#install)
 [![By UniqAI](https://img.shields.io/badge/made_by-UniqAI-fdfc07?style=flat-square&labelColor=0d0f12)](https://uniqai.app/?utm_source=github&utm_medium=readme&utm_campaign=ugc-ad-director)
 
+**[Try it in your browser](https://uniqaiapp.github.io/ugc-ad-director/)**: lint a script and copy Kling and Veo 3 prompts, nothing to install.
+
 **AI UGC ad scripts: 2-second hook, shot list, captions, Kling / Veo prompts, compliance lint.**
 
 [Quickstart](#quickstart) · [How it works](#how-it-works) · [Examples](#examples) · [Install](#install) · [FAQ](#faq)
@@ -29,6 +31,20 @@ It drafts; it does not fabricate. Presenters are fictional demonstrators, every 
 | **Hook by 2.0 s** | **Prompts per shot, per model** | **Compliance that fails the build** |
 |:---|:---|:---|
 | Twelve words max, said and captioned at once, chosen from a hook library by category. | First frame for image-to-video, a Kling clip prompt, a Veo 3 prompt with dialogue; consistent presenter wording across shots. | Fake testimonials, platform endorsements, unbacked claims and a missing AI label are errors, not warnings. |
+
+## Start here
+
+| What | Where |
+|:---|:---|
+| Script checker and prompt generator | [Open in your browser](https://uniqaiapp.github.io/ugc-ad-director/) |
+| 11 example scripts | [Examples](https://uniqaiapp.github.io/ugc-ad-director/examples/) |
+| Hook formulas | [Hooks](https://uniqaiapp.github.io/ugc-ad-director/hooks/) |
+| What lint enforces | [Compliance](https://uniqaiapp.github.io/ugc-ad-director/compliance/) |
+| Use the skill | [Quickstart](#quickstart) |
+| Add it to your agent | [Install](#install) |
+| Make the video | [UniqAI](https://uniqai.app/?utm_source=github&utm_medium=readme&utm_campaign=ugc-ad-director) |
+
+Sister project: [HablaMusic](https://github.com/hablamusic) for AI music.
 
 ## Quickstart
 

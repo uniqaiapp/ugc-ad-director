@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uniqaiapp.github.io/ugc-ad-director/sitemap.xml

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly: the invoice that chases itself | UGC Ad Script</title>
+<meta name="description" content="Ledgerly: the invoice that chases itself. A 30-second B2B SaaS UGC ad script with 6 shots, captions, claims and Kling and Veo 3 prompts. Free and open source.">
+<link rel="canonical" href="https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UniqAI open source">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Ledgerly: the invoice that chases itself | UGC Ad Script">
+<meta property="og:description" content="Ledgerly: the invoice that chases itself. A 30-second B2B SaaS UGC ad script with 6 shots, captions, claims and Kling and Veo 3 prompts. Free and open source.">
+<meta property="og:url" content="https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/">
+<meta property="og:image" content="https://uniqaiapp.github.io/ugc-ad-director/assets/social-preview.png">
+<meta property="og:image:width" content="1707">
+<meta property="og:image:height" content="853">
+<meta property="og:image:alt" content="ugc-ad-director: lint a UGC ad script and copy per-shot prompts for Kling and Veo 3">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ledgerly: the invoice that chases itself | UGC Ad Script">
+<meta name="twitter:description" content="Ledgerly: the invoice that chases itself. A 30-second B2B SaaS UGC ad script with 6 shots, captions, claims and Kling and Veo 3 prompts. Free and open source.">
+<meta name="twitter:image" content="https://uniqaiapp.github.io/ugc-ad-director/assets/social-preview.png">
+<meta name="theme-color" content="#0b1113">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../site.css">
+<link rel="alternate" type="text/plain" href="https://uniqaiapp.github.io/ugc-ad-director/llms.txt" title="llms.txt">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://uniqai.app/#org","name":"UniqAI","url":"https://uniqai.app/","logo":"https://uniqai.app/icon-512.png","sameAs":["https://github.com/uniqaiapp"]},{"@type":"WebSite","@id":"https://uniqaiapp.github.io/#site","name":"UniqAI open-source tools","url":"https://uniqaiapp.github.io/"},{"@type":"WebPage","@id":"https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/#page","url":"https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/","name":"Ledgerly: the invoice that chases itself | UGC Ad Script","description":"Ledgerly: the invoice that chases itself. A 30-second B2B SaaS UGC ad script with 6 shots, captions, claims and Kling and Veo 3 prompts. Free and open source.","inLanguage":"en","isPartOf":{"@id":"https://uniqaiapp.github.io/#site"},"publisher":{"@id":"https://uniqai.app/#org"},"license":"https://creativecommons.org/licenses/by/4.0/","dateModified":"2026-11-26","author":{"@type":"Person","name":"Vlad Yasinski","url":"https://www.roimobi.com/","sameAs":["https://www.linkedin.com/in/vlad-yasinski-ua5er/","https://github.com/ua5er"]},"primaryImageOfPage":{"@type":"ImageObject","url":"https://uniqaiapp.github.io/ugc-ad-director/assets/social-preview.png"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Checker","item":"https://uniqaiapp.github.io/ugc-ad-director/"},{"@type":"ListItem","position":2,"name":"Examples","item":"https://uniqaiapp.github.io/ugc-ad-director/examples/"},{"@type":"ListItem","position":3,"name":"Ledgerly: the invoice that chases itself","item":"https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#prompts">Skip to the prompts</a>
+<header class="top"><div class="wrap top-in">
+<a class="brand" href="https://uniqaiapp.github.io/" aria-label="UniqAI open-source tools"><img src="../../assets/wordmark.svg" alt="UniqAI" width="96" height="28"><span>open source</span></a>
+<nav class="nav" aria-label="Sections"><a href="../../">Checker</a><a href="../../examples/" aria-current="page">Examples</a><a href="../../hooks/">Hooks</a><a href="../../compliance/">Compliance</a><a href="https://github.com/uniqaiapp/ugc-ad-director" rel="noopener">GitHub</a></nav>
+<a class="btn btn-sm" href="https://uniqai.app/video/text-to-video?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director&amp;utm_content=header" data-out="header">Make a video</a>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap hero-in">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Checker</a> / <a href="../../examples/">Examples</a> / <span>Ledgerly: the invoice that chases itself</span></nav>
+<p class="pill"><span class="dot"></span>free · open source · MIT + CC BY 4.0</p>
+<h1>Ledgerly: the invoice that chases itself</h1>
+<p class="ug-quote">You don&#x27;t need to chase that invoice.</p>
+<p class="lead">An objection hook opens a script about reminders that go out on days seven, fourteen and twenty-one, and that schedule is listed as a claim with evidence. The reminder flow is a real screen recording, while the paid notification is generated. Nothing in it promises faster payment.</p>
+<p class="byline">Page updated 2026-11-26 · Rules checked 2026-10-28 · Curated by Vlad Yasinski (<a href="https://www.linkedin.com/in/vlad-yasinski-ua5er/" rel="noopener">LinkedIn</a>, <a href="https://www.roimobi.com/?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director" rel="noopener">roimobi.com</a>) · Open source on <a href="https://github.com/uniqaiapp/ugc-ad-director" rel="noopener">GitHub</a></p>
+<div class="hero-cta"><a class="btn" href="../../?example=b2b-invoicing">Open in checker</a><a class="btn btn-ghost" href="#prompts">Jump to the prompts</a></div>
+</div></section>
+<section class="ug-sec wrap" id="about">
+<h2>About this script</h2>
+<div class="ug-tablewrap"><table class="ug-table ug-kv"><tbody><tr><th scope="row">Product</th><td>Ledgerly: invoicing for freelancers with automatic, polite payment reminders</td></tr><tr><th scope="row">Vertical</th><td>B2B SaaS</td></tr><tr><th scope="row">Platforms</th><td>Reels, YouTube Shorts, TikTok</td></tr><tr><th scope="row">Length</th><td>30s</td></tr><tr><th scope="row">Aspect</th><td>9:16</td></tr><tr><th scope="row">Audience</th><td>freelancers and small agencies who hate sending &#x27;just following up&#x27; emails</td></tr><tr><th scope="row">Presenter</th><td>AI presenter: fictional woman, late thirties, home office, cardigan; generated, not based on anyone</td></tr><tr><th scope="row">Hook type</th><td>objection</td></tr><tr><th scope="row">Shot sources</th><td>4 image-to-video, 2 screen-recording</td></tr><tr><th scope="row">Claims listed</th><td>2</td></tr></tbody></table></div><p class="ug-small">A 6-shot script for Ledgerly: 4 generated and 2 real footage, screen recording or still, 2.63 words per second.</p>
+</section>
+<section class="ug-sec wrap" id="hook">
+<h2>Hook (ends at 2s)</h2>
+<blockquote class="ug-quote">You don&#x27;t need to chase that invoice.</blockquote><p class="ug-small">Type: objection. Removes the dreaded task in the first line; the viewer wants to know how.</p>
+</section>
+<section class="ug-sec wrap" id="timeline">
+<h2>Timeline</h2>
+<div class="ug-tablewrap"><table class="ug-table"><thead><tr><th scope="col">#</th><th scope="col">Time</th><th scope="col">Beat</th><th scope="col">Visual</th><th scope="col">Caption</th><th scope="col">Voiceover</th><th scope="col">Source</th></tr></thead><tbody><tr><td>1</td><td>0s–2s</td><td>hook</td><td>Presenter closes a half-written &#x27;just following up&#x27; email on her laptop</td><td>you don&#x27;t need to chase that invoice / AI-generated ad</td><td>You don&#x27;t need to chase that invoice.</td><td>image-to-video</td></tr><tr><td>2</td><td>2s–8s</td><td>problem</td><td>Presenter to camera, counting on fingers the three reminder emails she would normally write</td><td>three awkward emails per late invoice</td><td>Every late invoice means three awkward emails, and you still sound like you&#x27;re begging for your own money.</td><td>image-to-video</td></tr><tr><td>3</td><td>8s–16s</td><td>demo</td><td>Screen recording: create an invoice, toggle &#x27;reminders&#x27;, pick a tone (friendly / firm), send</td><td>toggle reminders. pick a tone. send.</td><td>Send the invoice, switch reminders on, pick friendly or firm. It emails the client on day seven, fourteen and twenty-one.</td><td>screen-recording</td></tr><tr><td>4</td><td>16s–21s</td><td>demo</td><td>Screen recording: the reminder email preview, written in plain language with the invoice attached</td><td>this is what the client gets</td><td>This is what the client gets. Plain, polite, invoice attached, pay button on top.</td><td>screen-recording</td></tr><tr><td>5</td><td>21s–26s</td><td>proof</td><td>Presenter holds the phone up: a &#x27;paid&#x27; notification, then puts the phone face down and goes back to work</td><td>you find out when it&#x27;s paid. that&#x27;s it.</td><td>You find out when it&#x27;s paid. You never write the email.</td><td>image-to-video</td></tr><tr><td>6</td><td>26s–30s</td><td>cta</td><td>Presenter to camera, laptop open again</td><td>free for your first five invoices. link below.</td><td>Free for your first five invoices. Link below.</td><td>image-to-video</td></tr></tbody></table></div>
+</section>
+<section class="ug-sec wrap" id="words">
+<h2>Voiceover and captions</h2>
+<h3>Voiceover script</h3><ul class="ug-notes"><li><strong>0s</strong> You don&#x27;t need to chase that invoice.</li><li><strong>2s</strong> Every late invoice means three awkward emails, and you still sound like you&#x27;re begging for your own money.</li><li><strong>8s</strong> Send the invoice, switch reminders on, pick friendly or firm. It emails the client on day seven, fourteen and twenty-one.</li><li><strong>16s</strong> This is what the client gets. Plain, polite, invoice attached, pay button on top.</li><li><strong>21s</strong> You find out when it&#x27;s paid. You never write the email.</li><li><strong>26s</strong> Free for your first five invoices. Link below.</li></ul><p class="ug-small">79 words over 30s (2.63 words/s).</p><h3>On-screen captions</h3><ul class="ug-notes"><li><code>0s</code> you don&#x27;t need to chase that invoice</li><li><code>0s</code> AI-generated ad</li><li><code>2s</code> three awkward emails per late invoice</li><li><code>8s</code> toggle reminders. pick a tone. send.</li><li><code>16s</code> this is what the client gets</li><li><code>21s</code> you find out when it&#x27;s paid. that&#x27;s it.</li><li><code>26s</code> free for your first five invoices. link below.</li></ul>
+</section>
+<section class="ug-sec wrap" id="prompts">
+<h2>Shot prompts</h2>
+<article class="ug-model" id="model-image"><h3>First-frame image prompts</h3>
+<div class="ug-shotp"><div class="ug-row"><h4>Shot 1 · hook · 0s-2s</h4><span class="ug-count">317 characters</span></div><pre id="ug-p-image-0" tabindex="0">fictional woman in her late thirties in a cardigan at a desk, closing a laptop lid halfway while looking at the lens, home office, bookshelf behind, window light from the left, laptop glow on her face, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-image-0" data-kind="prompt" data-model="image" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 2 · problem · 2s-8s</h4><span class="ug-count">217 characters</span></div><pre id="ug-p-image-1" tabindex="0">the same fictional woman talking to the camera, counting on three fingers, home office, window light, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-image-1" data-kind="prompt" data-model="image" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 5 · proof · 21s-26s</h4><span class="ug-count">265 characters</span></div><pre id="ug-p-image-4" tabindex="0">the fictional woman holding a phone toward the lens, a green notification banner on the screen, then placing it face down, home office, window light, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-image-4" data-kind="prompt" data-model="image" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 6 · cta · 26s-30s</h4><span class="ug-count">212 characters</span></div><pre id="ug-p-image-5" tabindex="0">the fictional woman at her desk, laptop open, speaking to the camera, home office, window light, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-image-5" data-kind="prompt" data-model="image" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><pre id="ug-all-image" hidden>## shot 1 · hook · 0s-2s
+fictional woman in her late thirties in a cardigan at a desk, closing a laptop lid halfway while looking at the lens, home office, bookshelf behind, window light from the left, laptop glow on her face, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.
+
+## shot 2 · problem · 2s-8s
+the same fictional woman talking to the camera, counting on three fingers, home office, window light, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.
+
+## shot 5 · proof · 21s-26s
+the fictional woman holding a phone toward the lens, a green notification banner on the screen, then placing it face down, home office, window light, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.
+
+## shot 6 · cta · 26s-30s
+the fictional woman at her desk, laptop open, speaking to the camera, home office, window light, home-office phone footage, laptop glow plus window light, unpolished, vertical 9:16, sharp focus, no text or logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-ghost btn-copy" data-copy="ug-all-image" data-kind="prompt" data-model="image" data-example="b2b-invoicing" data-label="Copy all 4 prompts">Copy all 4 prompts</button></p><div class="ug-cta"><p>Use each first frame as the start image in an image-to-video generator.</p><a class="btn btn-ghost" href="https://uniqai.app/video/image-to-video?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director&amp;utm_content=b2b-invoicing-image" data-out="example-image">Try an image-to-video generator</a></div>
+</article>
+<article class="ug-model" id="model-kling"><h3>Kling video prompts</h3>
+<div class="ug-shotp"><div class="ug-row"><h4>Shot 1 · hook · 0s-2s</h4><span class="ug-count">440 characters</span></div><pre id="ug-p-kling-0" tabindex="0">[5s clip, 9:16, image-to-video from the still above]
+fictional woman in her late thirties in a cardigan at a desk, closing a laptop lid halfway while looking at the lens, she pushes the laptop lid down and turns to the camera.
+Camera: handheld selfie, eye level.
+Lighting: window light from the left, laptop glow on her face.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: readable email text, logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-kling-0" data-kind="prompt" data-model="kling" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 2 · problem · 2s-8s</h4><span class="ug-count">401 characters</span></div><pre id="ug-p-kling-1" tabindex="0">[10s clip, 9:16, image-to-video from the still above]
+the same fictional woman talking to the camera, counting on three fingers, she raises one, two, three fingers and grimaces on the third.
+Camera: handheld selfie.
+Lighting: window light.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: text, watermark, extra fingers, warped product, plastic skin, slow motion.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-kling-1" data-kind="prompt" data-model="kling" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 5 · proof · 21s-26s</h4><span class="ug-count">440 characters</span></div><pre id="ug-p-kling-4" tabindex="0">[5s clip, 9:16, image-to-video from the still above]
+the fictional woman holding a phone toward the lens, a green notification banner on the screen, then placing it face down, she shows the phone, places it face down on the desk and turns back to her laptop.
+Camera: handheld selfie, eye level.
+Lighting: window light.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: readable notification text, logos.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-kling-4" data-kind="prompt" data-model="kling" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 6 · cta · 26s-30s</h4><span class="ug-count">374 characters</span></div><pre id="ug-p-kling-5" tabindex="0">[5s clip, 9:16, image-to-video from the still above]
+the fictional woman at her desk, laptop open, speaking to the camera, she nods toward the bottom of the frame.
+Camera: handheld selfie.
+Lighting: window light.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: text, watermark, extra fingers, warped product, plastic skin, slow motion.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-kling-5" data-kind="prompt" data-model="kling" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><pre id="ug-all-kling" hidden>## shot 1 · hook · 0s-2s
+[5s clip, 9:16, image-to-video from the still above]
+fictional woman in her late thirties in a cardigan at a desk, closing a laptop lid halfway while looking at the lens, she pushes the laptop lid down and turns to the camera.
+Camera: handheld selfie, eye level.
+Lighting: window light from the left, laptop glow on her face.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: readable email text, logos.
+
+## shot 2 · problem · 2s-8s
+[10s clip, 9:16, image-to-video from the still above]
+the same fictional woman talking to the camera, counting on three fingers, she raises one, two, three fingers and grimaces on the third.
+Camera: handheld selfie.
+Lighting: window light.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: text, watermark, extra fingers, warped product, plastic skin, slow motion.
+
+## shot 5 · proof · 21s-26s
+[5s clip, 9:16, image-to-video from the still above]
+the fictional woman holding a phone toward the lens, a green notification banner on the screen, then placing it face down, she shows the phone, places it face down on the desk and turns back to her laptop.
+Camera: handheld selfie, eye level.
+Lighting: window light.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: readable notification text, logos.
+
+## shot 6 · cta · 26s-30s
+[5s clip, 9:16, image-to-video from the still above]
+the fictional woman at her desk, laptop open, speaking to the camera, she nods toward the bottom of the frame.
+Camera: handheld selfie.
+Lighting: window light.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+Negative: text, watermark, extra fingers, warped product, plastic skin, slow motion.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-ghost btn-copy" data-copy="ug-all-kling" data-kind="prompt" data-model="kling" data-example="b2b-invoicing" data-label="Copy all 4 prompts">Copy all 4 prompts</button></p><div class="ug-cta"><p>UniqAI runs Kling and Veo among others.</p><a class="btn btn-ghost" href="https://uniqai.app/models/kling?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director&amp;utm_content=b2b-invoicing-kling" data-out="example-kling">Run Kling prompts on UniqAI</a></div>
+</article>
+<article class="ug-model" id="model-veo3"><h3>Veo 3 video prompts (with speech)</h3>
+<div class="ug-shotp"><div class="ug-row"><h4>Shot 1 · hook · 0s-2s</h4><span class="ug-count">510 characters</span></div><pre id="ug-p-veo3-0" tabindex="0">fictional woman in her late thirties in a cardigan at a desk, closing a laptop lid halfway while looking at the lens, home office, bookshelf behind.
+Action: she pushes the laptop lid down and turns to the camera.
+Camera: handheld selfie, eye level.
+Lighting: window light from the left, laptop glow on her face.
+Dialogue (on camera, natural pace): &quot;You don&#x27;t need to chase that invoice.&quot;
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-veo3-0" data-kind="prompt" data-model="veo3" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 2 · problem · 2s-8s</h4><span class="ug-count">511 characters</span></div><pre id="ug-p-veo3-1" tabindex="0">the same fictional woman talking to the camera, counting on three fingers, home office.
+Action: she raises one, two, three fingers and grimaces on the third.
+Camera: handheld selfie.
+Lighting: window light.
+Dialogue (on camera, natural pace): &quot;Every late invoice means three awkward emails, and you still sound like you&#x27;re begging for your own money.&quot;
+Audio: quiet room, a keyboard click.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-veo3-1" data-kind="prompt" data-model="veo3" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 5 · proof · 21s-26s</h4><span class="ug-count">503 characters</span></div><pre id="ug-p-veo3-4" tabindex="0">the fictional woman holding a phone toward the lens, a green notification banner on the screen, then placing it face down, home office.
+Action: she shows the phone, places it face down on the desk and turns back to her laptop.
+Camera: handheld selfie, eye level.
+Lighting: window light.
+Dialogue (on camera, natural pace): &quot;You find out when it&#x27;s paid. You never write the email.&quot;
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-veo3-4" data-kind="prompt" data-model="veo3" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><div class="ug-shotp"><div class="ug-row"><h4>Shot 6 · cta · 26s-30s</h4><span class="ug-count">406 characters</span></div><pre id="ug-p-veo3-5" tabindex="0">the fictional woman at her desk, laptop open, speaking to the camera, home office.
+Action: she nods toward the bottom of the frame.
+Camera: handheld selfie.
+Lighting: window light.
+Dialogue (on camera, natural pace): &quot;Free for your first five invoices. Link below.&quot;
+Audio: room tone.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-copy" data-copy="ug-p-veo3-5" data-kind="prompt" data-model="veo3" data-example="b2b-invoicing" data-label="Copy prompt">Copy prompt</button></p></div><pre id="ug-all-veo3" hidden>## shot 1 · hook · 0s-2s
+fictional woman in her late thirties in a cardigan at a desk, closing a laptop lid halfway while looking at the lens, home office, bookshelf behind.
+Action: she pushes the laptop lid down and turns to the camera.
+Camera: handheld selfie, eye level.
+Lighting: window light from the left, laptop glow on her face.
+Dialogue (on camera, natural pace): &quot;You don&#x27;t need to chase that invoice.&quot;
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.
+
+## shot 2 · problem · 2s-8s
+the same fictional woman talking to the camera, counting on three fingers, home office.
+Action: she raises one, two, three fingers and grimaces on the third.
+Camera: handheld selfie.
+Lighting: window light.
+Dialogue (on camera, natural pace): &quot;Every late invoice means three awkward emails, and you still sound like you&#x27;re begging for your own money.&quot;
+Audio: quiet room, a keyboard click.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.
+
+## shot 5 · proof · 21s-26s
+the fictional woman holding a phone toward the lens, a green notification banner on the screen, then placing it face down, home office.
+Action: she shows the phone, places it face down on the desk and turns back to her laptop.
+Camera: handheld selfie, eye level.
+Lighting: window light.
+Dialogue (on camera, natural pace): &quot;You find out when it&#x27;s paid. You never write the email.&quot;
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.
+
+## shot 6 · cta · 26s-30s
+the fictional woman at her desk, laptop open, speaking to the camera, home office.
+Action: she nods toward the bottom of the frame.
+Camera: handheld selfie.
+Lighting: window light.
+Dialogue (on camera, natural pace): &quot;Free for your first five invoices. Link below.&quot;
+Audio: room tone.
+Style: home-office phone footage, laptop glow plus window light, unpolished.
+No subtitles, no captions, no logos in frame.</pre><p class="ug-actions"><button type="button" class="btn btn-sm btn-ghost btn-copy" data-copy="ug-all-veo3" data-kind="prompt" data-model="veo3" data-example="b2b-invoicing" data-label="Copy all 4 prompts">Copy all 4 prompts</button></p><div class="ug-cta"><p>UniqAI runs Kling and Veo among others.</p><a class="btn btn-ghost" href="https://uniqai.app/models/veo?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director&amp;utm_content=b2b-invoicing-veo3" data-out="example-veo3">Run Veo 3 prompts on UniqAI</a></div>
+</article>
+<h3>Shots that are not generated</h3><ul class="ug-notes"><li>Shot 3 (screen-recording): Screen recording: create an invoice, toggle &#x27;reminders&#x27;, pick a tone (friendly / firm), send</li><li>Shot 4 (screen-recording): Screen recording: the reminder email preview, written in plain language with the invoice attached</li></ul>
+</section>
+<section class="ug-sec wrap" id="cta">
+<h2>Call to action</h2>
+<p>Spoken: Free for your first five invoices. Link below.</p><p>On screen: free for your first five invoices. link below.</p>
+</section>
+<section class="ug-sec wrap" id="claims">
+<h2>Claims and evidence</h2>
+<div class="ug-tablewrap"><table class="ug-table"><thead><tr><th scope="col">Claim</th><th scope="col">Evidence</th></tr></thead><tbody><tr><td>day seven, fourteen and twenty-one</td><td>default reminder schedule in the product settings; screenshot in the campaign folder with the date</td></tr><tr><td>free for your first five invoices</td><td>pricing page, free tier limit; checked on the filming date</td></tr></tbody></table></div>
+</section>
+<section class="ug-sec wrap" id="compliance">
+<h2>Compliance notes</h2>
+<ul class="ug-notes"><li>AI label on screen: <code>AI-generated ad</code></li><li>Platform AI-content toggle: on</li><li>Presenter: ai generated; fictional, not modelled on any real person</li><li>No &#x27;get paid faster&#x27; or days-sales-outstanding claim: there is no study on file.</li><li>The &#x27;paid&#x27; notification in shot 5 is generated; the demo of the actual reminder flow is a real screen recording.</li></ul><p class="ug-small">See the <a href="../../compliance/">compliance rules</a>. A working checklist, not legal advice.</p>
+</section>
+<section class="ug-sec wrap" id="lint">
+<h2>Lint result</h2>
+<p class="ug-sum ug-sum-ok"><b>✓ Lint passed</b> <span>0 errors · 0 warnings</span></p><p class="ug-small">Run by <code>ugc_script.py lint</code> when this page is built.</p>
+</section>
+<section class="ug-sec wrap" id="more-examples">
+<h2>More scripts</h2>
+<ul class="ug-list"><li><a href="../../examples/skincare-serum/"><strong>Glass-skin serum: the two-finger test</strong>Hook: Your foundation isn&#x27;t the problem.<em>30 s · AI presenter · 6 shots</em></a></li><li><a href="../../examples/meal-prep-app/"><strong>Platefull: Sunday meal prep in one screen</strong>Hook: Seven dinners, one grocery list, zero scrolling.<em>20 s · no presenter · 5 shots</em></a></li><li><a href="../../examples/kitchen-chopper/"><strong>Dicewell chopper: one onion, no tears, four seconds</strong>Hook: If onions make you cry, watch this.<em>30 s · AI presenter · 6 shots</em></a></li><li><a href="../../examples/dog-dental-chews/"><strong>Bitewell chews: the breath test (real owner, signed release)</strong>Hook: POV: your dog&#x27;s breath enters first.<em>30 s · real person · 6 shots</em></a></li><li><a href="../../examples/language-course/"><strong>Tongue: ten minutes of Spanish you actually say</strong>Hook: Stop learning Spanish. Start saying it.<em>45 s · AI presenter · 6 shots</em></a></li><li><a href="../../examples/cleaning-spray/"><strong>Clearstone: the hob in fifteen seconds</strong>Hook: Burnt-on hob. Watch the wipe.<em>15 s · no presenter · 5 shots</em></a></li><li><a href="../../examples/running-shoes/"><strong>Stride Two: the sock test</strong>Hook: Your shoe&#x27;s too narrow. Here&#x27;s the test.<em>30 s · AI presenter · 6 shots</em></a></li><li><a href="../../examples/travel-esim/"><strong>Roamly eSIM: landed, connected, before the bags</strong>Hook: Don&#x27;t buy the airport SIM.<em>30 s · AI presenter · 6 shots</em></a></li><li><a href="../../examples/coffee-subscription/"><strong>Roastday: the date on the bag</strong>Hook: Find the date on your coffee bag.<em>20 s · no presenter · 5 shots</em></a></li><li><a href="../../examples/pet-camera/"><strong>Pawcam: what the dog does at 2pm</strong>Hook: What the dog does at 2pm.<em>30 s · AI presenter · 6 shots</em></a></li></ul>
+</section>
+<section class="ug-sec wrap"><p class="ug-small">Source: <a href="https://github.com/uniqaiapp/ugc-ad-director/blob/main/examples/scripts/b2b-invoicing.json" rel="noopener">b2b-invoicing.json</a>, with the sheet and prompts in <code>examples/rendered/</code> and <code>examples/prompts/</code> on GitHub. The CLI prints the same prompts: <code>python3 scripts/ugc_script.py prompts examples/scripts/b2b-invoicing.json --model all</code>.</p></section>
+</main>
+<nav class="browse wrap" aria-label="Browse the checker, examples, hooks and rules"><h2>Browse the checker, hooks, rules and examples</h2><p><a href="../../">Script checker</a><a href="../../examples/">All examples</a><a href="../../hooks/">Hook library</a><a href="../../compliance/">Compliance rules</a><a href="../../examples/skincare-serum/">Glass-skin serum: the two-finger test</a><a href="../../examples/meal-prep-app/">Platefull: Sunday meal prep in one screen</a><a href="../../examples/kitchen-chopper/">Dicewell chopper: one onion, no tears, four seconds</a><a href="../../examples/dog-dental-chews/">Bitewell chews: the breath test (real owner, signed release)</a><a href="../../examples/language-course/">Tongue: ten minutes of Spanish you actually say</a><a href="../../examples/b2b-invoicing/">Ledgerly: the invoice that chases itself</a><a href="../../examples/cleaning-spray/">Clearstone: the hob in fifteen seconds</a><a href="../../examples/running-shoes/">Stride Two: the sock test</a><a href="../../examples/travel-esim/">Roamly eSIM: landed, connected, before the bags</a><a href="../../examples/coffee-subscription/">Roastday: the date on the bag</a><a href="../../examples/pet-camera/">Pawcam: what the dog does at 2pm</a></p></nav>
+<section class="more wrap" aria-labelledby="more-h">
+<h2 id="more-h">More free tools from UniqAI</h2>
+<ul class="tools"><li><a href="https://github.com/uniqaiapp/awesome-ai-video-prompts" rel="noopener"><strong>AI video prompt gallery</strong><span>Curated prompts for Kling, Veo, Wan, Runway and Seedance, with the settings behind each one.</span></a></li><li><a href="https://github.com/uniqaiapp/video-director" rel="noopener"><strong>Storyboard builder</strong><span>Timed beats in, paste-ready AI video prompts out for Kling, Veo and others.</span></a></li><li><a href="https://github.com/uniqaiapp/no-plastic" rel="noopener"><strong>Natural AI portraits</strong><span>Prompt rules and a checker that keep AI portraits from looking plastic.</span></a></li><li><a href="https://github.com/uniqaiapp/ai-video-pricing" rel="noopener"><strong>AI video prices</strong><span>Price per second and per clip for AI video models, with a source and date on every row.</span></a></li><li><a href="https://github.com/uniqaiapp/deslop-ru" rel="noopener"><strong>Russian AI-text cleaner</strong><span>Find and rewrite the phrases that make Russian text sound machine-written.</span></a></li><li><a href="https://github.com/uniqaiapp/suno-producer" rel="noopener"><strong>Suno song producer</strong><span>Structure, tags and style lines for Suno songs.</span></a></li>
+<li><a href="https://github.com/hablamusic" rel="noopener"><strong>HablaMusic</strong><span>Sister project: free AI music and DJ tools (Suno prompts, BPM and key finder).</span></a></li>
+</ul></section>
+<footer class="foot"><div class="wrap foot-in">
+<p><strong>UniqAI</strong> makes AI video, image and chat tools at <a href="https://uniqai.app/?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director&amp;utm_content=footer" data-out="footer">uniqai.app</a>. This tool is open source: code and examples under MIT, the vocabulary in references/ under CC BY 4.0, on <a href="https://github.com/uniqaiapp/ugc-ad-director" rel="noopener">GitHub</a>.</p>
+<p>Model names are trademarks of their owners. Not affiliated with Kuaishou or Google.</p>
+<p>Curated by <a href="https://www.roimobi.com/?utm_source=github&amp;utm_medium=pages&amp;utm_campaign=ugc-ad-director" rel="noopener">Vlad Yasinski</a> · <a href="https://www.linkedin.com/in/vlad-yasinski-ua5er/" rel="noopener">LinkedIn</a> · <a href="https://t.me/ua5er" rel="noopener">Telegram</a></p>
+</div></footer>
+<script>window.UQ={key:"phc_AVmhcac2jVRwi9asHEuhzJXnAbQA2hzfUxzWvzjyLPc8",repo:"ugc-ad-director"};</script>
+<script src="../../site.js" defer></script>
+</body></html>
