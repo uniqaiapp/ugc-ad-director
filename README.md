@@ -1,9 +1,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/banner.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.svg">
-  <img alt="ugc-ad-director by UniqAI" src="assets/banner.svg" width="1280" height="320">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.jpg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.jpg">
+  <img alt="ugc-ad-director by UniqAI: a film strip of UGC ad scenes (the Stride Two insole test, a glass-skin serum, the Dicewell chopper, the Roastday coffee bag), each tagged 0-2s with its hook type" src="assets/banner-dark.jpg" width="1280">
 </picture>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-d1fe17?style=flat-square&labelColor=0d0f12)](LICENSE)
@@ -18,11 +18,15 @@
 
 [Quickstart](#quickstart) · [How it works](#how-it-works) · [Examples](#examples) · [Install](#install) · [FAQ](#faq)
 
+<a href="https://uniqaiapp.github.io/ugc-ad-director/"><img alt="Screen recording of the live checker at uniqaiapp.github.io/ugc-ad-director: loading the Stride Two insole example, typing a 14-word hook that fails lint, fixing it to pass, then copying the Kling prompt for shot 1" src="assets/demo.gif" width="880"></a>
+
 </div>
 
 English · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (BR)](README.pt-BR.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-# ugc-ad-director: AI UGC ad scripts and video prompts
+# ugc-ad-director: UGC ad script checker and AI video prompts for Kling and Veo 3
+
+ugc-ad-director is a free, open-source UGC ad script checker and prompt generator for image models, Kling and Veo 3. It lints the hook, the AI label, claims and fake testimonials, then writes a per-shot prompt for each model. It runs in the browser, as a stdlib Python script, and as a Claude Code skill, a Cursor rule and a Codex / `AGENTS.md` snippet. MIT licence.
 
 AI UGC ads start with a script, not a prompt. This skill turns a product brief into a TikTok / Reels / Shorts ad script with the hook inside the first two seconds, five timed beats (hook → problem → demo → proof → CTA), a shot list, on-screen captions, voiceover, and a per-shot prompt for the image model, for Kling and for Veo 3 with spoken lines. A stdlib Python script lints the result and refuses what should not ship: an AI presenter talking like a customer, "clinically proven" without a source, a missing AI label.
 

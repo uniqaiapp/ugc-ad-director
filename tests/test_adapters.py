@@ -86,7 +86,7 @@ class TestAdapters(unittest.TestCase):
         meta = json.loads(read(".github/repo.json"))
         self.assertTrue(meta["description"])
         self.assertLessEqual(len(meta["topics"]), 20)
-        self.assertIn("utm_campaign=" + REPO, meta["homepage"])
+        self.assertEqual(meta["homepage"], "https://uniqaiapp.github.io/%s/" % REPO)
 
     def test_readme_links_and_footer(self):
         readme = read("README.md")
