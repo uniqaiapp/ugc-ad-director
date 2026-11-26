@@ -1,4 +1,4 @@
-# Stride Two: the sock test
+# Stride Two: the insole test
 
 **Product:** Stride Two — neutral daily running shoe with a knit upper and a wide toe box  
 **Vertical:** apparel / footwear · **Platforms:** tiktok, reels, shorts · **Length:** 30s · **Aspect:** 9:16  
@@ -9,7 +9,7 @@
 
 > Your shoe's too narrow. Here's the test.
 
-Type: curiosity. Offers a quick self-diagnosis; the viewer wants the test more than the shoe.
+Type: test. Offers a quick self-diagnosis; the viewer wants the test more than the shoe.
 
 ## Timeline
 

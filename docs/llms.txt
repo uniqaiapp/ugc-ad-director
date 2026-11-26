@@ -4,10 +4,10 @@
 
 ## Pages
 
-- [Script checker](https://uniqaiapp.github.io/ugc-ad-director/): the in-browser tool, with an example loaded
+- [Script checker](https://uniqaiapp.github.io/ugc-ad-director/): the in-browser tool, with an example loaded; it writes the AI UGC ad generator prompt for each shot
 - [Examples](https://uniqaiapp.github.io/ugc-ad-director/examples/): 11 finished scripts
 - [Hook library](https://uniqaiapp.github.io/ugc-ad-director/hooks/): 63 hooks of 12 words or fewer, by product category
-- [Compliance rules](https://uniqaiapp.github.io/ugc-ad-director/compliance/): the AI label, testimonials, impersonation and claims, each with a lint example
+- [Compliance rules](https://uniqaiapp.github.io/ugc-ad-director/compliance/): FTC rules on fake testimonials in AI UGC ads, plus the AI label, impersonation and claims, each with a lint example
 
 ## Examples
 
@@ -18,7 +18,7 @@
 - [Tongue: ten minutes of Spanish you actually say](https://uniqaiapp.github.io/ugc-ad-director/examples/language-course/): hook "Stop learning Spanish. Start saying it." (45s, AI presenter)
 - [Ledgerly: the invoice that chases itself](https://uniqaiapp.github.io/ugc-ad-director/examples/b2b-invoicing/): hook "You don't need to chase that invoice." (30s, AI presenter)
 - [Clearstone: the hob in fifteen seconds](https://uniqaiapp.github.io/ugc-ad-director/examples/cleaning-spray/): hook "Burnt-on hob. Watch the wipe." (15s, no presenter)
-- [Stride Two: the sock test](https://uniqaiapp.github.io/ugc-ad-director/examples/running-shoes/): hook "Your shoe's too narrow. Here's the test." (30s, AI presenter)
+- [Stride Two: the insole test](https://uniqaiapp.github.io/ugc-ad-director/examples/running-shoes/): hook "Your shoe's too narrow. Here's the test." (30s, AI presenter)
 - [Roamly eSIM: landed, connected, before the bags](https://uniqaiapp.github.io/ugc-ad-director/examples/travel-esim/): hook "Don't buy the airport SIM." (30s, AI presenter)
 - [Roastday: the date on the bag](https://uniqaiapp.github.io/ugc-ad-director/examples/coffee-subscription/): hook "Find the date on your coffee bag." (20s, no presenter)
 - [Pawcam: what the dog does at 2pm](https://uniqaiapp.github.io/ugc-ad-director/examples/pet-camera/): hook "What the dog does at 2pm." (30s, AI presenter)

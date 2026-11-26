@@ -333,7 +333,44 @@
     for (var i = 0; i < rules.length; i++) if (new RegExp(rules[i].re).test(msg)) return rules[i].why;
     return "";
   }
-  function lintHtml(r) {
+  // plain-language wording, same table and tokens as FRIENDLY in scripts/site.py
+  function quoteFor(where, script, kind) {
+    var m = /^shot (\d+)$/.exec(where || ""), shot = null;
+    if (m && script && Array.isArray(script.shots)) shot = script.shots[Number(m[1]) - 1];
+    if (!shot || typeof shot !== "object") return "";
+    var text = kind === "t" ? pyStr(get(shot, "voiceover", "")) + " " + pyStr(get(shot, "caption", "")) : shotText(shot);
+    var pats = kind === "t" ? D.pats.t : D.pats.e;
+    for (var i = 0; i < pats.length; i++) {
+      var hit = new RegExp(pats[i], "i").exec(text);
+      if (hit) return "\u201c" + hit[0] + "\u201d";
+    }
+    return "";
+  }
+  function friendly(where, msg, script) {
+    var table = D.friendly;
+    for (var i = 0; i < table.length; i++) {
+      var m = new RegExp(table[i].re).exec(msg);
+      if (!m) continue;
+      var rx = table[i].re;
+      return table[i].to.replace(/\{(q|\d)(-1)?\}/g, function (all, k, dec) {
+        if (k === "q") return quoteFor(where, script, rx.indexOf("testimonial") >= 0 ? "t" : "e") || "This wording";
+        var v = m[Number(k)] || "";
+        if (dec) v = String(parseInt(v, 10) - 1);
+        return has(D.pres, v) ? D.pres[v] : v;
+      });
+    }
+    return msg;
+  }
+  function whyHtml(why, prefix) {
+    return esc(why).replace(/\((compliance|structure|script-format|model-prompts)\.md(?:, section (\d))?\)/g, function (all, ref, no) {
+      if (ref === "compliance") {
+        var href = (prefix || "") + "compliance/" + (no && has(D.anchors, no) ? "#" + D.anchors[no] : "");
+        return '(<a href="' + href + '">compliance rules' + (no ? ", section " + no : "") + "</a>)";
+      }
+      return '(<a href="' + D.repo + "/blob/main/references/" + ref + '.md" rel="noopener">' + ref + ".md</a>)";
+    });
+  }
+  function lintHtml(r, script, prefix) {
     var ok = !r.errors.length;
     var h = '<p class="ug-sum ' + (ok ? "ug-sum-ok" : "ug-sum-bad") + '"><b>' + (ok ? "✓ Lint passed" : "✕ Lint failed") + "</b> <span>" +
       plural(r.errors.length, "error") + " · " + plural(r.warnings.length, "warning") + "</span></p>";
@@ -341,7 +378,7 @@
     function item(cls, tag, label, pair) {
       var why = whyFor(pair[1]);
       items += '<li class="' + cls + '"><b aria-label="' + label + '">' + tag + " " + label + '</b> <span class="ug-where">' + esc(pair[0]) +
-        "</span> " + esc(pair[1]) + (why ? ' <small class="ug-why">Why: ' + esc(why) + "</small>" : "") + "</li>";
+        "</span> " + esc(friendly(pair[0], pair[1], script)) + (why ? ' <small class="ug-why">Why: ' + whyHtml(why, prefix) + "</small>" : "") + "</li>";
     }
     r.errors.forEach(function (p) { item("ug-err", "✕", "Error", p); });
     r.warnings.forEach(function (p) { item("ug-warn", "!", "Warning", p); });
@@ -518,6 +555,7 @@
     b.setAttribute("aria-pressed", state.json ? "true" : "false");
     b.textContent = state.json ? "Back to the form" : "Edit as JSON";
     if (state.json) $("ug-json").value = JSON.stringify(state.script, null, 2);
+    growAll();
   }
   function onClick(e) {
     var t = e.target.closest("[data-act],#ug-blank,#ug-jsonbtn,.ug-tab");
@@ -555,10 +593,16 @@
     var out = $("ug-out");
     if (!out) return;
     var r;
-    try { r = lint(state.script); } catch (err) { out.innerHTML = '<p class="ug-sum ug-sum-bad"><b>✕ Cannot check this script</b> <span>' + esc(err && err.message ? err.message : "invalid shape") + "</span></p>"; return; }
+    try { r = lint(state.script); } catch (err) {
+      $("ug-lint").innerHTML = '<p class="ug-sum ug-sum-bad"><b>✕ Cannot check this script</b> <span>The script is missing a part the checker needs. Start from a blank script or load an example.</span></p>';
+      $("ug-stats").innerHTML = ""; $("ug-panel").innerHTML = "";
+      var bb = $("ug-bar"); if (bb) { bb.className = "ug-bar ug-bar-bad"; bb.innerHTML = '<span>✕ Cannot check this script</span><a href="#ug-out">See result</a>'; }
+      return;
+    }
     var st = null, panel = "";
     try { st = stats(state.script); panel = panelHtml(state.script, state.model, state.slug); } catch (err2) { panel = ""; }
-    $("ug-lint").innerHTML = lintHtml(r);
+    $("ug-lint").innerHTML = lintHtml(r, state.script, "");
+    bar(r);
     $("ug-stats").innerHTML = st ? statsHtml(st) : "";
     $("ug-tabs").innerHTML = tabsHtml(state.model);
     $("ug-panel").innerHTML = panel;
@@ -584,16 +628,43 @@
     track("tool_used", { action: "load_example", example: slug, source: source || "select" });
     return true;
   }
+  function jsonLine(v, msg) {
+    var m = /position (\d+)/.exec(msg);
+    if (m) return v.slice(0, Number(m[1])).split("\n").length;
+    m = /line (\d+)/.exec(msg);
+    return m ? Number(m[1]) : 0;
+  }
   function onJson() {
     var v = $("ug-json").value;
+    if (!v.trim()) { say("Paste a script or load an example."); return; }
     try {
       var o = JSON.parse(v);
-      if (!o || typeof o !== "object" || Array.isArray(o)) throw new Error("the top level must be an object");
+      if (!o || typeof o !== "object" || Array.isArray(o)) throw new Error("top");
       state.script = o; state.slug = "";
-      say("JSON parsed.");
+      say("JSON read.");
       update();
-    } catch (err) { say("JSON error: " + err.message + ". The result below is from the last valid version."); }
+    } catch (err) {
+      if (err && err.message === "top") { say("A script is one object that starts with {. The result shows your last valid version."); return; }
+      var line = jsonLine(v, err && err.message ? err.message : "");
+      say("The JSON can't be read" + (line ? " near line " + line : "") + ". Check commas and quotes. The result shows your last valid version.");
+    }
   }
+
+  // sticky status bar for narrow screens: counts and a jump link to the result
+  function bar(r) {
+    var b = $("ug-bar");
+    if (!b) return;
+    var e = r.errors.length, w = r.warnings.length;
+    b.className = "ug-bar " + (e ? "ug-bar-bad" : "ug-bar-ok");
+    b.innerHTML = "<span>" + (e ? "✕ " : "✓ ") + plural(e, "error") + " · " + plural(w, "warning") + '</span><a href="#ug-out">See result</a>';
+  }
+  function grow(el) {
+    if (!el || el.tagName !== "TEXTAREA" || el.id === "ug-json") return;
+    if (window.CSS && CSS.supports && CSS.supports("field-sizing", "content")) return;
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + 2 + "px";
+  }
+  function growAll() { Array.prototype.forEach.call(document.querySelectorAll("#ug-fields textarea"), grow); }
 
   function init() {
     var node = $("ug-data"), root = $("ug-form");
@@ -607,7 +678,7 @@
     if (ex === "bad" || ex === "fake-testimonial") ex = D.badSlug;
     rebuildForm();
     if (ex && exampleScript(ex)) loadExample(ex, "link"); else update();
-    root.addEventListener("input", function (e) { if (e.target.id === "ug-json") { clearTimeout(onJson.t); onJson.t = setTimeout(onJson, 350); } else onInput(e); });
+    root.addEventListener("input", function (e) { grow(e.target); if (e.target.id === "ug-json") { clearTimeout(onJson.t); onJson.t = setTimeout(onJson, 350); } else onInput(e); });
     root.addEventListener("change", function (e) {
       if (e.target.id === "ug-example") { if (e.target.value) loadExample(e.target.value, "select"); else { state.slug = ""; update(); } }
       else if (e.target.id !== "ug-json") onInput(e);
@@ -619,7 +690,7 @@
 
   var api = {
     setData: function (d) { D = d; }, lint: lint, stats: stats, renderPrompts: renderPrompts, shotPrompts: shotPrompts, lintHtml: lintHtml,
-    statsHtml: statsHtml, panelHtml: panelHtml, tabsHtml: tabsHtml, esc: esc, pyFixed: pyFixed, pyRepr: pyRepr, round2: round2
+    statsHtml: statsHtml, friendly: friendly, panelHtml: panelHtml, tabsHtml: tabsHtml, esc: esc, pyFixed: pyFixed, pyRepr: pyRepr, round2: round2
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   if (typeof document !== "undefined") {

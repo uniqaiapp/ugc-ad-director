@@ -13,6 +13,7 @@ for (const [slug, s] of Object.entries(all)) {
   out[slug] = {
     lint: { errors: r.errors, warnings: r.warnings },
     stats: c.stats(s),
+    lintHtml: c.lintHtml(r, s, "../../"),
     prompts: {}
   };
   for (const k of ["image", "kling", "veo3", "all"]) out[slug].prompts[k] = c.renderPrompts(s, k);

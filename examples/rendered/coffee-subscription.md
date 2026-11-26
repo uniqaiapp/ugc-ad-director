@@ -9,7 +9,7 @@
 
 > Find the date on your coffee bag.
 
-Type: comparison. A visual comparison the viewer can repeat in their own kitchen tonight.
+Type: test. A visual comparison the viewer can repeat in their own kitchen tonight.
 
 ## Timeline
 

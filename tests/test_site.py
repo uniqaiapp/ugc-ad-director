@@ -24,14 +24,23 @@ class SiteTests(unittest.TestCase):
             h = files[k]
             t = re.search(r"<title>(.*?)</title>", h).group(1)
             d = re.search(r'name="description" content="(.*?)"', h).group(1)
-            self.assertLessEqual(len(t), 65, (k, len(t)))
-            self.assertTrue(140 <= len(d) <= 160, (k, len(d)))
+            self.assertLessEqual(len(t), 60, (k, len(t)))
+            self.assertTrue(100 <= len(d) <= 150, (k, len(d)))
             self.assertNotIn(t, titles)
             self.assertNotIn(d, descs)
             titles.add(t); descs.add(d)
             self.assertEqual(h.count('rel="canonical"'), 1)
             self.assertIn("assets/social-preview.png", h)
             self.assertEqual(("FAQPage" in h), k == "index.html")
+
+    def test_answer_blocks_and_friendly_lint(self):
+        files = ug.render_all()
+        for k in ("index.html", "examples/index.html", "examples/skincare-serum/index.html"):
+            self.assertRegex(files[k], r"<h2[^>]*>[^<]*\?</h2>", k)
+        self.assertIn("How to choose a UGC ad script template", files["examples/index.html"])
+        self.assertIn("FTC rules for fake testimonials in AI UGC ads", files["compliance/index.html"])
+        bad = files["compliance/index.html"]
+        self.assertNotRegex(bad, r"--[a-z]+-[a-z]+|\b(first_person|ai_presenter)\b")
 
     def test_uniq_links_tagged(self):
         for k, h in ug.render_all().items():
@@ -79,6 +88,7 @@ class SiteTests(unittest.TestCase):
             self.assertEqual(j["lint"]["errors"], [list(e) for e in rep.errors], slug)
             self.assertEqual(j["lint"]["warnings"], [list(w) for w in rep.warnings], slug)
             self.assertEqual(j["stats"], us.stats(s), slug)
+            self.assertEqual(j["lintHtml"], ug.lint_html(rep, s, "../../"), slug)
             for k in ("image", "kling", "veo3", "all"):
                 self.assertEqual(j["prompts"][k], us.render_prompts(s, k), (slug, k))
         self.assertEqual(len(scripts), 12)

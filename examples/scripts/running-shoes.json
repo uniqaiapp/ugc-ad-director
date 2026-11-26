@@ -1,5 +1,5 @@
 {
-  "title": "Stride Two: the sock test",
+  "title": "Stride Two: the insole test",
   "vertical": "apparel / footwear",
   "product": {
     "name": "Stride Two",
@@ -18,7 +18,7 @@
     "description": "fictional woman, mid thirties, running kit, hallway; generated, not based on anyone"
   },
   "hook": {
-    "type": "curiosity",
+    "type": "test",
     "text": "Your shoe's too narrow. Here's the test.",
     "why": "Offers a quick self-diagnosis; the viewer wants the test more than the shoe."
   },

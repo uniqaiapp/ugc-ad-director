@@ -36,12 +36,12 @@ OG_SIZE = (1707, 853)
 POSTHOG_KEY = "phc_AVmhcac2jVRwi9asHEuhzJXnAbQA2hzfUxzWvzjyLPc8"  # public project key (EU), same as uniqai.app
 LINKEDIN = "https://www.linkedin.com/in/vlad-yasinski-ua5er/"
 AUTHOR = {"@type": "Person", "name": "Vlad Yasinski", "url": "https://www.roimobi.com/",
-          "sameAs": [LINKEDIN, "https://github.com/ua5er"]}
+          "sameAs": ["https://www.roimobi.com", LINKEDIN, "https://github.com/ua5er"]}
 BAD_SLUG = "fake-testimonial"
 COMPLIANCE_URL = REPO + "/blob/main/references/compliance.md"
 
 TOOLS = [  # other uniqaiapp tools, shown in "More free tools"
-    ("awesome-ai-video-prompts", "AI video prompt gallery", "Curated prompts for Kling, Veo, Wan, Runway and Seedance, with the settings behind each one."),
+    ("awesome-ai-video-prompts", "Prompt gallery", "AI video prompt gallery with model settings."),
     ("video-director", "Storyboard builder", "Timed beats in, paste-ready AI video prompts out for Kling, Veo and others."),
     ("no-plastic", "Natural AI portraits", "Prompt rules and a checker that keep AI portraits from looking plastic."),
     ("ai-video-pricing", "AI video prices", "Price per second and per clip for AI video models, with a source and date on every row."),
@@ -50,7 +50,7 @@ TOOLS = [  # other uniqaiapp tools, shown in "More free tools"
 ]
 
 PRESENTER_LABEL = {"ai_generated": "AI presenter", "real_person": "real person", "none": "no presenter"}
-HOOK_LABEL = {"pov": "POV", "pattern-interrupt": "pattern interrupt", "result-first": "result first"}
+HOOK_LABEL = {"test": "test", "pov": "POV", "pattern-interrupt": "pattern interrupt", "result-first": "result first"}
 PLATFORM_LABEL = {"tiktok": "TikTok", "reels": "Reels", "shorts": "YouTube Shorts"}
 TAG_NAMES = {"PI": "pattern interrupt", "CO": "callout", "CT": "contrarian", "RF": "result first", "CU": "curiosity",
              "CM": "comparison", "OB": "objection", "POV": "POV", "TEST": "a check the viewer can do now"}
@@ -87,9 +87,9 @@ INTROS = {
     "language-course": "The hook is contrarian and the script runs 45 seconds, the longest of the eleven. The only numbers are counts from the product itself, such as thirty situations. The fictional presenter never says he learned Spanish with the course.",
     "b2b-invoicing": "An objection hook opens a script about reminders that go out on days seven, fourteen and twenty-one, and that schedule is listed as a claim with evidence. The reminder flow is a real screen recording, while the paid notification is generated. Nothing in it promises faster payment.",
     "cleaning-spray": "At 15 seconds this is the shortest script and it has no voiceover, so the captions carry the whole ad. The generated demo shows the intended use and the proof is real footage. The surface list names glass and induction only.",
-    "running-shoes": "The hook hands the viewer a test they can run right now: the insole test. No injury or podiatrist wording appears anywhere. The generated running shots start from product photos used as reference frames.",
-    "travel-esim": "No price is spoken or captioned, and no real airline, airport or carrier branding shows up in the generated shots. The one claim is that there is no contract. The hook tells the viewer not to buy the airport SIM.",
-    "coffee-subscription": "A comparison hook sets up a demo the viewer can see for themselves: the bloom, in place of taste claims. The roast date is on the bag and the ship date is on the box. The script promises no delivery time.",
+    "running-shoes": "The hook hands the viewer a check they can run right now, the insole test: pull the insole out and stand on it. No injury or podiatrist wording appears anywhere. The generated running shots start from product photos used as reference frames.",
+    "travel-esim": "No price is spoken or captioned, and no real airline, airport or carrier branding shows up in the generated shots. The one claim is that there is no contract. The two screen recordings, the install flow and the plan page, are real, so the app shows up exactly as it is.",
+    "coffee-subscription": "The hook hands the viewer a check to run on their own bag: find the roast date. The demo shows the bloom in place of taste claims, and the ship date is on the box. The script promises no delivery time.",
     "pet-camera": "The generated camera feed has no timestamp overlay, so it cannot pass for real footage. The real device appears in shot 5. Separation anxiety and vet wording stay out.",
 }
 
@@ -132,14 +132,14 @@ def fit(options, lo, hi, what):
 
 
 def fit_desc(options):
-    return fit(options, 140, 160, "description")
+    return fit(options, 100, 150, "description")
 
 
 def fit_title(options):
     for o in options:
-        if len(o) <= 65:
+        if len(o) <= 60:
             return o
-    raise SystemExit("no title fits 65 characters: %s" % options)
+    raise SystemExit("no title fits 60 characters: %s" % options)
 
 
 def md_inline(s):
@@ -220,7 +220,7 @@ CASES = [  # (id, title, what the rule does, where, fail mutation, fail snippet,
     ("toggle-off", "The platform AI switch is not on", "Set platform_toggle to true once the AI-content setting is switched on in the ad manager.",
      "compliance.platform_toggle", _set(["compliance", "platform_toggle"], False), '"platform_toggle": false',
      None, '"platform_toggle": true', r"platform_toggle"),
-    ("presenter-description", "The AI presenter has no description", "A written description keeps the presenter fictional and stops it from being mistaken for a real person.",
+    ("presenter-description", "The AI presenter has no description", "A written description helps keep the presenter fictional, so it is not mistaken for a real person.",
      "presenter.description", _set(["presenter", "description"], ""), '"description": ""',
      None, '"description": "fictional woman, late twenties, no makeup, towel on hair; generated, not based on anyone"', r"describe the AI presenter"),
     ("fake-testimonial", "An AI presenter speaks as a customer", "With an AI or no presenter, first-person experience wording is a fabricated testimonial. Lint fails it.",
@@ -273,7 +273,7 @@ def build_cases(base):
         if rg.errors or rg.warnings:
             raise SystemExit("case %s: the passing version is not clean: %s %s" % (cid, rg.errors, rg.warnings))
         out.append({"id": cid, "title": title, "why": why, "where": where, "fail": fsnip, "pass": psnip,
-                    "level": hits[0][0], "message": hits[0][1], "all": [m for _, m in r.errors + r.warnings]})
+                    "level": hits[0][0], "message": friendly((re.match(r"shot \d+", where) or [where])[0] if re.match(r"shot \d+", where) else where, hits[0][1], bad), "all": [m for _, m in r.errors + r.warnings]})
     return out
 
 
@@ -282,6 +282,110 @@ def rule_for(msg):
         if re.search(rx, msg):
             return why
     return ""
+
+
+# Plain-language wording for each lint message, shown on the site. The CLI keeps its own wording (the READMEs quote it).
+# Tokens: {N} is regex group N, {N-1} is group N minus one, {q} is the offending words quoted from the shot.
+# checker.js applies the same table, so the browser and the built pages read the same.
+PRES_FRIENDLY = {"ai_generated": "an AI presenter", "none": "a script with no presenter", "real_person": "a real person"}
+FRIENDLY = [
+    (r"^hook is (\d+) words; keep it under (\d+) so it lands inside ([\d.]+) s$",
+     "The hook is {1} words. Keep it to {2-1} words or fewer so it lands inside {3} seconds."),
+    (r"^caption line is (\d+) chars; keep lines under (\d+) for a phone screen$",
+     "This caption line is {1} characters. Keep each line to {2-1} characters max so it fits a phone screen."),
+    (r"^voiceover runs at ([\d.]+) words/s over ([\d.]+s); above --max-wps ([\d.]+)$",
+     "The voiceover speaks {1} words per second over {2}, above the {3} words per second pace. Cut words or give the shot more time."),
+    (r"^reads as a first-person customer testimonial but the presenter is '(.*)': rewrite as a demo or a sourced claim$",
+     "{q} reads as a customer testimonial, and {1} cannot give one. Rewrite it as a demo or a sourced claim."),
+    (r"^implies a platform or third-party endorsement; remove it$",
+     "{q} suggests a platform or another party endorses the ad. Remove it."),
+    (r"^'(.*)' is a claim; list it under 'claims' with evidence or drop it$",
+     "\"{1}\" is a claim. Add it to the claims list with evidence, or take it out."),
+    (r"^number '(.*)' is not backed by an entry in 'claims'$",
+     "The number \"{1}\" has no source. Add it to the claims list with evidence, or take it out."),
+    (r"^'(.*)' has no evidence; add a source, a test or remove the claim$",
+     "\"{1}\" is in the claims list without evidence. Add a source or a test, or remove the claim."),
+    (r"^ai_label is empty but ", "Add an on-screen AI label such as \"AI-generated ad\": the ad has generated footage or an AI presenter."),
+    (r"^ai_label '(.*)' does not appear in any caption; put it on screen$",
+     "The label \"{1}\" is not in any caption. Add it as a caption line from the first shot."),
+    (r"^set platform_toggle: true once", "Switch on the platform's AI-content setting when you upload, then tick the box for it here."),
+    (r"^describe the AI presenter so", "Describe the AI presenter in a sentence, as a fictional person who is not modelled on anyone real."),
+    (r"^prompt is missing 'subject'$", "This shot's prompt has no subject. Add one, e.g. a bare foot on a grey insole."),
+    (r"^prompt is missing 'action'$", "This shot's prompt has no action. Add one, e.g. the foot settles onto the insole."),
+    (r"^prompt is missing 'camera'$", "This shot's prompt has no camera move. Add one, e.g. slow push-in."),
+    (r"^prompt is missing '(.*)'$", "This shot's prompt has no {1}. Fill it in."),
+    (r"^AI-generated shot has no 'prompt' object$", "A generated shot needs a prompt with a subject, an action and a camera move, e.g. slow push-in."),
+    (r"^missing field\(s\): (.*)$", "This shot is missing {1}. Fill each one in, e.g. a visual that says what is on screen, or a beat of demo."),
+    (r"^missing top-level field '(.*)'$", "The script has no \"{1}\" field. Add it, or start from the blank script."),
+    (r"^type must be one of (.*)$", "Set the presenter type to one of: {1}."),
+    (r"^source must be one of (.*)$", "Set the shot source to one of: {1}."),
+    (r"^hook text is empty$", "Write the hook text: 12 words or fewer, said and captioned together."),
+    (r"^hook text does not appear in the first shot", "Say or caption the hook text in the first shot, so the viewer reads what they hear."),
+    (r"^first shot must be the hook$", "The first shot must be the hook. Set its beat to hook."),
+    (r"^first shot must start at 0$", "The first shot must start at 0 seconds."),
+    (r"^hook shot ends at ([\d.]+s); it must end by ([\d.]+s)$", "The hook shot ends at {1}. End it by {2} so the hook lands in time."),
+    (r"^missing beat\(s\): (.*)$", "The script has no {1} beat. Every script runs hook, problem, demo, proof, cta."),
+    (r"^beats out of order: (.*); expected (.*)$", "The beats run {1}. Put them in this order: {2}."),
+    (r"^last shot must be the cta$", "The last shot must be the cta beat."),
+    (r"^starts at ([\d.]+s) but previous shot ended at ([\d.]+s)$", "This shot starts at {1} but the previous one ended at {2}. Make the times meet."),
+    (r"^end_s must be greater than start_s$", "This shot must end after it starts. Raise its end time."),
+    (r"^shots end at ([\d.]+s) but duration_s is ([\d.]+s)$", "The shots end at {1}, but the script length is {2}. Make the two match."),
+    (r"^over 60 s", "This script runs over 60 seconds. Check each platform's current ad length limit."),
+    (r"^no shots$", "Add at least one shot."),
+    (r"^cta text is empty$", "Write the spoken call to action."),
+]
+REF_URL = {"compliance": "compliance/", "structure": "", "script-format": "", "model-prompts": ""}
+COMPLIANCE_ANCHORS = {"1": "disclose", "2": "testimonials", "3": "impersonation", "4": "claims"}
+
+
+def quote_for(where, script, kind):
+    """The words in the shot that tripped a testimonial (kind t) or endorsement (kind e) rule, in quotes."""
+    m = re.match(r"^shot (\d+)$", where or "")
+    try:
+        shot = script["shots"][int(m.group(1)) - 1]
+    except (TypeError, KeyError, IndexError, AttributeError, ValueError):
+        return ""
+    if not isinstance(shot, dict):
+        return ""
+    if kind == "t":
+        text, pats = "%s %s" % (shot.get("voiceover", ""), shot.get("caption", "")), us.TESTIMONIAL_PATTERNS
+    else:
+        text, pats = us.shot_text(shot), us.IMPERSONATION_PATTERNS
+    for pat in pats:
+        hit = re.search(pat, text, re.I)
+        if hit:
+            return "\u201c%s\u201d" % hit.group(0)
+    return ""
+
+
+def friendly(where, msg, script):
+    for rx, to in FRIENDLY:
+        m = re.search(rx, msg)
+        if not m:
+            continue
+
+        def sub(t):
+            k = t.group(1)
+            if k == "q":
+                return quote_for(where, script, "t" if "testimonial" in rx else "e") or "This wording"
+            v = m.group(int(k)) if int(k) <= len(m.groups()) else ""
+            v = v or ""
+            if t.group(2):
+                v = str(int(v) - 1)
+            return PRES_FRIENDLY.get(v, v)
+        return re.sub(r"\{(q|\d)(-1)?\}", sub, to)
+    return msg
+
+
+def why_html(why, prefix=""):
+    """The Why text with its (compliance.md, section 2) style references turned into links."""
+    def link(m):
+        ref, sec_no = m.group(1), m.group(2)
+        if ref == "compliance":
+            href = prefix + "compliance/" + ("#" + COMPLIANCE_ANCHORS[sec_no] if sec_no in COMPLIANCE_ANCHORS else "")
+            return '(<a href="%s">compliance rules%s</a>)' % (href, ", section " + sec_no if sec_no else "")
+        return '(<a href="%s/blob/main/references/%s.md" rel="noopener">%s.md</a>)' % (REPO, ref, ref)
+    return re.sub(r"\((compliance|structure|script-format|model-prompts)\.md(?:, section (\d))?\)", link, esc(why))
 
 
 # ---------------------------------------------------------------- hook library parsed from references/
@@ -321,6 +425,12 @@ COMPLIANCE_ANSWER = ("An AI-generated UGC ad needs a plain on-screen label from 
                      "and a dated source for every measurable claim. Put the label in a caption, not in a corner the app can cover. This is a working checklist, not legal advice.")
 assert 40 <= word_count(HOOK_ANSWER) <= 60, word_count(HOOK_ANSWER)
 assert 40 <= word_count(COMPLIANCE_ANSWER) <= 60, word_count(COMPLIANCE_ANSWER)
+HOME_ANSWER = ("A UGC ad script checker reads a script and runs lint rules on it: a hook of 12 words or fewer that ends by 2 seconds, five beats in order, "
+               "an on-screen AI label, claims backed by evidence and no fake testimonials. It then writes a first-frame image, Kling and Veo 3 prompt for every generated shot.")
+EXAMPLES_ANSWER = ("A finished UGC ad script has a hook, five beats from problem to call to action, captions, a voiceover and a source for every shot, with each claim listed beside its evidence. "
+                   "Every example here passes lint, and every generated shot has a prompt for Kling and Veo 3.")
+assert 40 <= word_count(HOME_ANSWER) <= 60, word_count(HOME_ANSWER)
+assert 40 <= word_count(EXAMPLES_ANSWER) <= 60, word_count(EXAMPLES_ANSWER)
 
 
 def faq_items(n_hooks):
@@ -338,7 +448,7 @@ def faq_items(n_hooks):
          "Veo 3 prompts include a Dialogue line when the shot has a voiceover, the presenter is not none and on_camera_speech is not false. "
          "Kling prompts describe the visuals only, so record or synthesise the voiceover separately and lay it over the clip."),
         ("Is the checker free, and does it send my script anywhere?",
-         "It is free. The code and examples are MIT and the vocabulary in references/ is CC BY 4.0. The text you type stays in your browser; only anonymous action counts are sent, never the script. "
+         "It is free. The code and examples are MIT and the vocabulary in references/ is CC BY 4.0. Page views and button clicks are counted anonymously; your script text never leaves the browser. "
          "Generating the video elsewhere may cost credits, depending on the tool."),
         ("Does a clean lint mean the ad is compliant?",
          "No. Lint checks the rules in this repo and nothing more. Platform policies and laws change, and the notes were last checked on %s. "
@@ -348,7 +458,7 @@ def faq_items(n_hooks):
 
 # ---------------------------------------------------------------- server-side markup (mirrors the functions in checker.js)
 
-def lint_html(r):
+def lint_html(r, script=None, prefix=""):
     ok = not r.errors
     h = '<p class="ug-sum %s"><b>%s</b> <span>%s · %s</span></p>' % (
         "ug-sum-ok" if ok else "ug-sum-bad", "✓ Lint passed" if ok else "✕ Lint failed",
@@ -358,7 +468,8 @@ def lint_html(r):
         for where, msg in pairs:
             why = rule_for(msg)
             items += '<li class="%s"><b aria-label="%s">%s %s</b> <span class="ug-where">%s</span> %s%s</li>' % (
-                cls, label, tag, label, esc(where), esc(msg), (' <small class="ug-why">Why: %s</small>' % esc(why)) if why else "")
+                cls, label, tag, label, esc(where), esc(friendly(where, msg, script)),
+                (' <small class="ug-why">Why: %s</small>' % why_html(why, prefix)) if why else "")
     if items:
         h += '<ul class="ug-checks">%s</ul>' % items
     return h
@@ -645,27 +756,31 @@ def source_mix(b):
     return ", ".join("%d %s" % (n, k) for k, n in counts.items())
 
 
-def example_title(b):
-    t = b["title"]
-    short = t.split(":")[0]
-    return fit_title([t + " | UGC Ad Script", short + " | UGC Ad Script and Prompts", short + " | UGC Ad Script", short])
+CATEGORY = {"skincare-serum": "Skincare", "meal-prep-app": "Meal Prep App", "kitchen-chopper": "Kitchen Gadget", "dog-dental-chews": "Pet Care",
+            "language-course": "Online Course", "b2b-invoicing": "B2B SaaS", "cleaning-spray": "Home Cleaning", "running-shoes": "Running Shoes",
+            "travel-esim": "Travel eSIM", "coffee-subscription": "Coffee Subscription", "pet-camera": "Pet Camera"}
 
 
-def example_desc(b, st):
-    t, d, v, n = b["title"], int(b["duration_s"]), b["vertical"], st["shots"]
-    short = t.split(":")[0]
-    heads = [t + ".", short + "."]
-    tails = [
-        " A %d-second %s UGC ad script: %d shots, captions and prompts for Kling and Veo 3. It passes lint. Free and open source." % (d, v, n),
-        " A %d-second %s UGC ad script with %d shots, captions and Kling and Veo 3 prompts. Passes lint. Free and open source." % (d, v, n),
-        " A %d-second %s UGC ad script with %d shots, captions, claims and Kling and Veo 3 prompts. Free and open source." % (d, v, n),
-        " %d-second %s UGC ad script, %d shots, with captions and prompts for Kling and Veo 3. Passes lint. Free, open source." % (d, v, n),
-        " %d-second %s UGC ad script, %d shots, with captions and Kling and Veo 3 prompts. Free and open source." % (d, v, n),
-        " %d-second %s UGC ad script: captions, claims and prompts for Kling and Veo 3. Passes lint. Free and open source." % (d, v),
-        " A %d-second %s UGC ad script with a hook, %d shots, captions and Kling and Veo 3 prompts. Passes lint. Free and open source." % (d, v, n),
-        " A %d-second UGC ad script for %s with %d shots, captions and prompts for Kling and Veo 3. Free, open source." % (d, v, n),
-    ]
-    return fit_desc([h + t for h in heads for t in tails])
+def brand_of(b):
+    return b["product"]["name"]
+
+
+def example_title(slug, b):
+    cat, name = CATEGORY[slug], brand_of(b)
+    return fit_title(["UGC Ad Script for %s: %s | UniqAI" % (cat, name),
+                      "UGC Ad Script for %s: %s | UniqAI" % (cat, name.split()[0]),
+                      "UGC Ad Script for %s | UniqAI" % cat])
+
+
+def example_desc(slug, b, st):
+    cat, name, d, n = CATEGORY[slug], brand_of(b), int(b["duration_s"]), st["shots"]
+    first = name.split()[0]
+    opts = []
+    for nm in (name, first):
+        opts += ["UGC ad script for %s: %s. %d-second %s ad, %d shots, captions and Kling and Veo 3 prompts. Passes lint. Free and open source." % (cat.lower(), nm, d, b["vertical"], n),
+                 "UGC ad script for %s: %s. %d-second ad, %d shots, captions and Kling and Veo 3 prompts. Free and open source." % (cat.lower(), nm, d, n),
+                 "UGC ad script for %s: %s. %d s, %d shots, captions and Kling and Veo 3 prompts. Free, open source." % (cat.lower(), nm, d, n)]
+    return fit_desc(opts)
 
 
 def about_sentence(b, st):
@@ -674,9 +789,26 @@ def about_sentence(b, st):
     if gen:
         parts.append("%d generated" % gen)
     if real:
-        parts.append("%d real footage, screen recording or still" % real)
-    wps = "%s words per second" % st["voiceover_wps"] if st["voiceover_words"] else "no voiceover"
-    return "%s %d-shot script for %s: %s, %s." % (cap_first(a_an(st["shots"])), st["shots"], b["product"]["name"], " and ".join(parts), wps)
+        parts.append("%d filmed or screen-recorded" % real)
+    vo = "Voiceover pace %s words/s." % st["voiceover_wps"] if st["voiceover_words"] else "No voiceover; the captions carry the ad."
+    return "%d shots: %s. %s" % (st["shots"], ", ".join(parts), vo)
+
+
+def how_answer(slug, b, st):
+    gen, real = st["ai_generated_shots"], st["shots"] - st["ai_generated_shots"]
+    hook = b["hook"]
+    mix = ("%d are generated and %d are real footage, screen recording or still" % (gen, real)) if gen and real else (
+        "all %d are generated" % gen if gen else "none is generated")
+    opts = ['%s runs %d seconds and opens with a %s hook, \u201c%s\u201d %s Of its %d shots, %s. It passes lint, and each generated shot has Kling and Veo 3 prompts.' % (
+                brand_of(b), int(b["duration_s"]), label_hook(hook.get("type", "")), hook["text"], hook.get("why", ""), st["shots"], mix),
+            '%s runs %d seconds and opens with a %s hook, \u201c%s\u201d Of its %d shots, %s. It passes lint, and each generated shot has Kling and Veo 3 prompts.' % (
+                brand_of(b), int(b["duration_s"]), label_hook(hook.get("type", "")), hook["text"], st["shots"], mix),
+            '%s runs %d seconds and opens with a %s hook, \u201c%s\u201d Of its %d shots, %s. It passes lint, with prompts for each generated shot.' % (
+                brand_of(b), int(b["duration_s"]), label_hook(hook.get("type", "")), hook["text"], st["shots"], mix)]
+    for o in opts:
+        if 40 <= word_count(o) <= 60:
+            return o
+    raise SystemExit("no 40-60 word answer for %s: %s" % (slug, [word_count(o) for o in opts]))
 
 
 def timeline_table(b):
@@ -696,7 +828,8 @@ def example_body(slug, b, examples):
              ("Presenter", PRESENTER_LABEL[pres["type"]] + (": " + pres["description"] if pres.get("description") else "")),
              ("Hook type", label_hook(hook.get("type", ""))), ("Shot sources", source_mix(b)),
              ("Claims listed", str(st["claims"]))]
-    body = sec("About this script", kv_table(about) + '<p class="ug-small">%s</p>' % esc(about_sentence(b, st)), "about")
+    body = sec("How does this %s UGC ad script work?" % CATEGORY[slug].lower(), '<p class="ug-answer">%s</p>' % esc(how_answer(slug, b, st)), "answer")
+    body += "\n" + sec("About this script", kv_table(about) + '<p class="ug-small">%s</p>' % esc(about_sentence(b, st)), "about")
     body += "\n" + sec("Hook (ends at %s)" % us.fmt_s(b["shots"][0]["end_s"]),
                        '<blockquote class="ug-quote">%s</blockquote><p class="ug-small">Type: %s. %s</p>' % (
                            esc(hook["text"]), esc(label_hook(hook.get("type", ""))), esc(hook.get("why", ""))), "hook")
@@ -728,7 +861,7 @@ def example_body(slug, b, examples):
     comp_items += ["<li>%s</li>" % esc(n) for n in comp.get("notes", [])]
     body += "\n" + sec("Compliance notes", '<ul class="ug-notes">%s</ul><p class="ug-small">See the <a href="../../compliance/">compliance rules</a>. '
                        'A working checklist, not legal advice.</p>' % "".join(comp_items), "compliance")
-    body += "\n" + sec("Lint result", lint_html(us.lint(b)) + '<p class="ug-small">Run by <code>ugc_script.py lint</code> when this page is built.</p>', "lint")
+    body += "\n" + sec("Lint result", lint_html(us.lint(b), b, "../../") + '<p class="ug-small">Run by <code>ugc_script.py lint</code> when this page is built.</p>', "lint")
     body += "\n" + sec("More scripts", example_list(examples, slug).replace("{P}", "../../"), "more-examples")
     body += ('\n<section class="ug-sec wrap"><p class="ug-small">Source: <a href="%s/blob/main/examples/scripts/%s.json" rel="noopener">%s.json</a>, '
              'with the sheet and prompts in <code>examples/rendered/</code> and <code>examples/prompts/</code> on GitHub. The CLI prints the same prompts: '
@@ -737,6 +870,16 @@ def example_body(slug, b, examples):
 
 
 # ---------------------------------------------------------------- pages
+
+CHOOSE_HTML = (
+    "<p>Start from the product, not the platform, and keep the five beats whichever script you pick.</p>"
+    '<ul class="ug-notes">'
+    '<li>Software and apps need real screen recordings. Start from <a href="meal-prep-app/">Platefull</a> or <a href="b2b-invoicing/">Ledgerly</a>.</li>'
+    '<li>A physical product with a visible result suits a demo with no presenter. Try <a href="cleaning-spray/">Clearstone</a> or <a href="kitchen-chopper/">Dicewell</a>.</li>'
+    '<li>Skin, pet-health and other regulated categories need the most care with claims. <a href="skincare-serum/">Dewline</a> shows how to list each one with evidence.</li>'
+    '<li>If a real customer speaks, use <a href="dog-dental-chews/">Bitewell</a>, the one script with a signed release.</li></ul>'
+    "<p>Then swap the hook, check the claims list against what you can prove, and run lint before you generate anything.</p>")
+
 
 def build_pages(examples, bad):
     pages = {}
@@ -768,13 +911,16 @@ def build_pages(examples, bad):
     # ---- index
     data = {"order": list(examples), "titles": {s: b["title"] for s, b in examples.items()}, "badSlug": BAD_SLUG,
             "examples": examples, "bad": bad, "blank": us.scaffold("your vertical", "Your product"),
-            "rules": [{"re": rx, "why": why} for rx, why in RULES], "cta": CTA}
+            "rules": [{"re": rx, "why": why} for rx, why in RULES], "cta": CTA, "repo": REPO,
+            "friendly": [{"re": rx, "to": to} for rx, to in FRIENDLY], "pres": PRES_FRIENDLY,
+            "pats": {"t": us.TESTIMONIAL_PATTERNS, "e": us.IMPERSONATION_PATTERNS}, "anchors": COMPLIANCE_ANCHORS}
     d0 = examples[default]
     r0 = us.lint(d0)
     legend = ('<p class="ug-legend">✕ Error: fix it before you use the script. ! Warning: check it. Image is the first frame for image-to-video. '
               'Kling and Veo 3 are the video prompts.</p>')
     builder = """<section class="ug-builder wrap" id="builder" aria-labelledby="builder-h">
 <h2 id="builder-h">Script checker and prompt generator</h2>
+<div class="ug-bar ug-bar-ok" id="ug-bar" aria-live="polite"><span>{bar}</span><a href="#ug-out">See result</a></div>
 <div class="ug-layout">
 <div class="ug-form" id="ug-form" data-example="{default}"><p class="ug-small">Loading the form. It needs JavaScript. The result on the right is a ready-made example.</p></div>
 <div class="ug-out" id="ug-out">
@@ -789,7 +935,7 @@ def build_pages(examples, bad):
 </div>
 </div>
 <script type="application/json" id="ug-data">{data}</script>
-</section>""".format(default=default, lint=lint_html(r0), stats=stats_html(us.stats(d0)), legend=legend, tabs=tabs_html("kling"),
+</section>""".format(default=default, bar="✓ %s · %s" % (plural(len(r0.errors), "error"), plural(len(r0.warnings), "warning")), lint=lint_html(r0, d0), stats=stats_html(us.stats(d0)), legend=legend, tabs=tabs_html("kling"),
                      panel=panel_html(d0, "kling", default), data=jdump(data))
     steps = """<ol class="ug-steps">
 <li><strong>Load or write a script</strong>Pick one of the %d examples, start from a blank script or edit the JSON. A script has a hook, five beats in order, captions, a voiceover and a source for every shot.</li>
@@ -797,18 +943,19 @@ def build_pages(examples, bad):
 <li><strong>Copy the prompts</strong>Each generated shot gets a first-frame image prompt, a Kling prompt and a Veo 3 prompt. Copy one shot or all of them, with the character count beside each.</li>
 </ol>""" % n_ex
     body = builder
+    body += "\n" + answer_sec("How does a UGC ad script checker work?", HOME_ANSWER)
     body += "\n" + sec("How it works", steps, "how")
     body += "\n" + sec("%d example scripts" % n_ex, example_list(examples).replace("{P}", ""), "examples")
     body += "\n" + faq_html(faq)
     desc = fit_desc([
-        "Free in-browser UGC ad script checker: lint the hook, AI label, claims and testimonials, then copy per-shot prompts for Kling, Veo 3 and image models. Open source.",
-        "Free UGC ad script checker in your browser: lint the hook, AI label, claims and testimonials, then copy per-shot prompts for Kling, Veo 3 and images. Open source.",
-        "Free UGC ad script checker: lint the hook, the AI label, claims and testimonials, then copy per-shot prompts for Kling, Veo 3 and image models. Open source."])
+        "Free UGC ad script checker: lint the hook, AI label, claims and fake testimonials, then copy Kling, Veo 3 and image prompts per shot. Open source.",
+        "Free UGC ad script checker: lint the hook, AI label, claims and testimonials, then copy prompts for Kling, Veo 3 and images. Open source.",
+        "Free UGC ad script checker: lint the hook, AI label and claims, then copy per-shot prompts for Kling and Veo 3. Open source."])
     pages[""] = page(
         "", fit_title(["UGC Ad Script Checker and Prompt Generator | UniqAI", "UGC Ad Script Checker | UniqAI"]), desc,
         "UGC ad script checker for Kling and Veo 3 prompts",
         "Edit a UGC ad script and lint it for the hook, the AI label, claims and fake testimonials. Then copy a prompt for every generated shot, for image models, Kling and Veo 3. "
-        "The text you type stays in your browser; only anonymous action counts are sent.",
+        "Page views and button clicks are counted anonymously; your script text never leaves the browser.",
         body, examples, [("Checker", "")], current="", extra_graph=[app, faq_graph(faq)], main_entity=BASE + "#app",
         skip="#builder", skip_label="Skip to the checker", builder=True,
         buttons=[btn("#builder", "Open the checker"), btn("examples/", "See %d examples" % n_ex, ghost=True),
@@ -818,12 +965,13 @@ def build_pages(examples, bad):
     pages["examples/"] = page(
         "examples/", fit_title(["%d UGC Ad Script Examples with Kling and Veo 3 Prompts | UniqAI" % n_ex,
                                 "%d UGC Ad Script Examples with Prompts | UniqAI" % n_ex]),
-        fit_desc(["%d finished UGC ad scripts across skincare, apps, food, pets and travel. Each has a hook, shot list, captions and Kling and Veo 3 prompts. Free, open source." % n_ex,
-                  "%d finished UGC ad scripts for skincare, apps, food, pets, travel and more. Each has a hook, a shot list, captions and Kling and Veo 3 prompts. Free and open source." % n_ex,
-                  "%d finished UGC ad scripts for skincare, apps, food, pets and travel, each with a hook, shot list, captions and Kling and Veo 3 prompts. Free and open source." % n_ex]),
+        fit_desc(["%d finished UGC ad scripts for skincare, apps, food, pets and travel, each with a hook, shot list, captions and Kling and Veo 3 prompts. Free, open source." % n_ex,
+                  "%d finished UGC ad scripts for skincare, apps, food, pets and travel, with hooks, shot lists, captions and Kling and Veo 3 prompts. Open source." % n_ex,
+                  "%d finished UGC ad scripts, each with a hook, shot list, captions and Kling and Veo 3 prompts. Free and open source." % n_ex]),
         "UGC ad script examples", "Each example is a complete script that passes lint: the hook, five beats, captions, voiceover, claims with evidence and prompts for every generated shot. "
         "Open one to read it, or load it into the checker and change it.",
-        sec("%d finished scripts" % n_ex, example_list(examples).replace("{P}", ""), "list"), examples,
+        answer_sec("What does a finished UGC ad script look like?", EXAMPLES_ANSWER) + "\n"
+        + sec("%d finished scripts" % n_ex, example_list(examples).replace("{P}", ""), "list") + "\n" + sec("How to choose a UGC ad script template", CHOOSE_HTML, "choose"), examples,
         [("Checker", ""), ("Examples", "examples/")], current="examples/", extra_graph=[app], main_entity=BASE + "#app",
         skip="#list", skip_label="Skip to the examples",
         buttons=[btn("../", "Open the checker"), btn(REPO + "/tree/main/examples", "Source files on GitHub", ghost=True)])
@@ -833,7 +981,7 @@ def build_pages(examples, bad):
         path = "examples/%s/" % slug
         st = us.stats(b)
         pages[path] = page(
-            path, example_title(b), example_desc(b, st), b["title"], INTROS[slug], example_body(slug, b, examples), examples,
+            path, example_title(slug, b), example_desc(slug, b, st), b["title"], INTROS[slug], example_body(slug, b, examples), examples,
             [("Checker", ""), ("Examples", "examples/"), (b["title"], path)], current="examples/", kind="WebPage",
             quote=b["hook"]["text"], skip="#prompts", skip_label="Skip to the prompts",
             buttons=[btn("../../?example=%s" % slug, "Open in checker"), btn("#prompts", "Jump to the prompts", ghost=True)])
@@ -856,9 +1004,9 @@ def build_pages(examples, bad):
                            btn("../", "Open the checker"), btn("../examples/", "See the examples", ghost=True)), "use")
     pages["hooks/"] = page(
         "hooks/", fit_title(["UGC Ad Hooks: %d Examples for the First 2 Seconds | UniqAI" % n_hooks, "%d UGC Ad Hooks for the First 2 Seconds | UniqAI" % n_hooks]),
-        fit_desc(["%d UGC ad hooks of 12 words or fewer, grouped by product category and tagged by type, plus the openers to avoid. Free, open source, CC BY 4.0." % n_hooks,
-                  "%d UGC ad hooks of 12 words or fewer, grouped into %d product categories and tagged by type, plus the openers to avoid. Free and open source, CC BY 4.0." % (n_hooks, len(cats)),
-                  "%d UGC ad hooks of 12 words or fewer for the first 2 seconds, grouped into %d product categories and tagged by type. Free and open source, CC BY 4.0." % (n_hooks, len(cats))]),
+        fit_desc(["%d UGC ad hooks of 12 words or fewer, grouped by product category and type, plus the openers to avoid. Free, open source, CC BY 4.0." % n_hooks,
+                  "%d UGC ad hooks of 12 words or fewer, by product category and type, plus openers to avoid. Free and open source, CC BY 4.0." % n_hooks,
+                  "%d UGC ad hooks of 12 words or fewer, by category and type. Free and open source, CC BY 4.0." % n_hooks]),
         "UGC ad hook library", "Hooks for the first two seconds of a UGC ad, grouped by product category. Each one is 12 words or fewer, written to be said and captioned at once, "
         "and works with a demonstrator presenter.", body, examples, [("Checker", ""), ("Hooks", "hooks/")], current="hooks/",
         extra_graph=[app], main_entity=BASE + "#app", skip="#answer", skip_label="Skip to the answer",
@@ -891,6 +1039,13 @@ def build_pages(examples, bad):
     body = answer_sec("What does an AI-generated UGC ad have to disclose?", COMPLIANCE_ANSWER)
     body += "\n" + sec("Working checklist, not legal advice", '<p>These rules are a working checklist for ad drafts. Policies change, so read each platform\'s current ad policy before a campaign goes live. '
                        'The dates in the source file are from %s.</p><p class="ug-small">Source: <a href="%s" rel="noopener">references/compliance.md</a>.</p>' % (RULES_CHECKED, COMPLIANCE_URL), "scope")
+    ftc = ('<p>As checked on %s, and summarised from <a href="%s" rel="noopener">references/compliance.md</a>: the FTC rule on fake reviews and testimonials, '
+           '16 CFR Part 465 (effective 21 October 2024), prohibits testimonials by people who do not exist or who did not use the product, including AI-generated ones.</p>'
+           '<ul class="ug-notes"><li>The FTC Endorsement Guides, 16 CFR Part 255 (revised 2023), require endorsements to reflect honest experience and material connections to be disclosed.</li>'
+           '<li>An AI presenter is a demonstrator. It can show, explain, compare and ask, and it cannot say \u201cI\u2019ve used this\u201d or \u201cnot sponsored\u201d. Lint fails those phrasings for AI and no-presenter scripts.</li>'
+           '<li>A real customer or creator can testify, with a signed release, proof of purchase and a paid-partnership disclosure in speech and on screen.</li></ul>'
+           '<p class="ug-small">A working checklist, not legal advice. Read the rule text before you run a campaign.</p>') % (RULES_CHECKED, COMPLIANCE_URL)
+    body += "\n" + sec("FTC rules for fake testimonials in AI UGC ads", ftc, "ftc")
     for t, inner, sid in sections:
         body += "\n" + sec(t, inner, sid)
     case_html = ""
@@ -900,7 +1055,7 @@ def build_pages(examples, bad):
                       '<p class="ug-small"><b>%s:</b> %s</p></div>'
                       '<div class="ug-pass"><p><b>✓ Passes</b></p><pre tabindex="0">%s</pre></div></div></article>' % (
                           c["id"], esc(c["title"]), esc(c["why"]), esc(c["where"]), esc(c["fail"]), c["level"], esc(c["message"]), esc(c["pass"])))
-    body += "\n" + sec("What lint checks, rule by rule", "<p>Each failing example below was run through lint when this page was built. The message is the one lint printed.</p>" + case_html, "rules")
+    body += "\n" + sec("What lint checks, rule by rule", "<p>Each failing example below was run through lint when this page was built. The message is what the checker shows for it.</p>" + case_html, "rules")
     plat = [("TikTok Ads", "AI-generated content disclosure; restricted categories (health, finance, supplements); no misleading before and after; branded content toggle for creator posts; ad length limits for the placement."),
             ("Meta (Reels, Instagram, Facebook)", "\"AI info\" labelling and disclosure rules for realistic generated content; personal attributes policy (do not imply the viewer has a condition); restricted categories; special ad categories."),
             ("YouTube Shorts (Google Ads)", "Altered or synthetic content disclosure; misrepresentation policy; healthcare and medicines policy; Shorts length limits for the ad format.")]
@@ -912,9 +1067,9 @@ def build_pages(examples, bad):
     body += "\n" + sec("Pre-flight checklist", '<ul class="ug-checklist">%s</ul>' % "".join("<li>%s</li>" % md_inline(x) for x in pre), "preflight")
     pages["compliance/"] = page(
         "compliance/", fit_title(["AI UGC Ad Compliance Checklist: Labels and Claims | UniqAI", "AI UGC Ad Compliance Checklist | UniqAI"]),
-        fit_desc(["A working checklist for AI-generated UGC ads: the AI label, fake testimonials, impersonation and claims, with a lint fail and pass example for each rule. Not legal advice.",
-                  "A working checklist for AI-generated UGC ads: the AI label, fake testimonials, impersonation and claims, each with a fail and pass example. Not legal advice.",
-                  "A working checklist for AI-generated UGC ads: the on-screen AI label, fake testimonials, impersonation and claims, each with a lint fail and pass example. Not legal advice."]),
+        fit_desc(["A checklist for AI-generated UGC ads: AI label, fake testimonials, impersonation and claims, each with a lint fail and pass example. Not legal advice.",
+                  "A checklist for AI-generated UGC ads: AI label, fake testimonials, impersonation and claims, with a fail and pass example. Not legal advice.",
+                  "A checklist for AI-generated UGC ads: the AI label, fake testimonials and claims, with examples. Not legal advice."]),
         "AI-generated UGC ad compliance checklist",
         "What to disclose, what to avoid and what to prove in a UGC ad made with AI video. Every rule that lint enforces is shown below with a failing and a passing example.",
         body, examples, [("Checker", ""), ("Compliance", "compliance/")], current="compliance/", extra_graph=[app], main_entity=BASE + "#app",
@@ -934,10 +1089,10 @@ def llms_txt(examples, n_hooks):
     lines = ["# ugc-ad-director: UGC ad script checker (UniqAI, open source)", "",
              "> Free in-browser checker for UGC ad scripts. It lints the hook, the AI label, claims and fake testimonials, then renders a first-frame image prompt, a Kling prompt and a Veo 3 prompt for every generated shot. "
              "%d example scripts, %d hooks. Rules last checked %s; a working checklist, not legal advice. Code MIT, vocabulary CC BY 4.0. Curated by Vlad Yasinski (%s)." % (len(examples), n_hooks, RULES_CHECKED, LINKEDIN),
-             "", "## Pages", "", "- [Script checker](%s): the in-browser tool, with an example loaded" % BASE,
+             "", "## Pages", "", "- [Script checker](%s): the in-browser tool, with an example loaded; it writes the AI UGC ad generator prompt for each shot" % BASE,
              "- [Examples](%sexamples/): %d finished scripts" % (BASE, len(examples)),
              "- [Hook library](%shooks/): %d hooks of 12 words or fewer, by product category" % (BASE, n_hooks),
-             "- [Compliance rules](%scompliance/): the AI label, testimonials, impersonation and claims, each with a lint example" % BASE,
+             "- [Compliance rules](%scompliance/): FTC rules on fake testimonials in AI UGC ads, plus the AI label, impersonation and claims, each with a lint example" % BASE,
              "", "## Examples", ""]
     for slug, b in examples.items():
         lines.append("- [%s](%sexamples/%s/): hook \"%s\" (%s, %s)" % (b["title"], BASE, slug, b["hook"]["text"], us.fmt_s(b["duration_s"]), PRESENTER_LABEL[b["presenter"]["type"]]))

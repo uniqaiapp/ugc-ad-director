@@ -18,7 +18,7 @@
     "description": null
   },
   "hook": {
-    "type": "comparison",
+    "type": "test",
     "text": "Find the date on your coffee bag.",
     "why": "A visual comparison the viewer can repeat in their own kitchen tonight."
   },
